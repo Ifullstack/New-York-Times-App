@@ -15,6 +15,16 @@
 		B08CCA64278065D3003A9B19 /* Boxing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA63278065D3003A9B19 /* Boxing.swift */; };
 		B08CCA662780660A003A9B19 /* App+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA652780660A003A9B19 /* App+Error.swift */; };
 		B08CCA6A278069D6003A9B19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA69278069D6003A9B19 /* UIColor+Extension.swift */; };
+		B08CCA7627807B3A003A9B19 /* Label+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA7527807B3A003A9B19 /* Label+View.swift */; };
+		B08CCA7A27807F64003A9B19 /* PostTypeFilters+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA7927807F64003A9B19 /* PostTypeFilters+View.swift */; };
+		B08CCA7E27807F8A003A9B19 /* MostSharedFilters+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA7D27807F8A003A9B19 /* MostSharedFilters+View.swift */; };
+		B08CCA8127808B1A003A9B19 /* RadioFilters+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA8027808B1A003A9B19 /* RadioFilters+Cell.swift */; };
+		B08CCA882780ADD4003A9B19 /* PostFilters+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA872780ADD4003A9B19 /* PostFilters+Model.swift */; };
+		B08CCA8C2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA8B2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift */; };
+		B08CCA932780B707003A9B19 /* FilterView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA922780B707003A9B19 /* FilterView+Constraints.swift */; };
+		B08CCA962780BC91003A9B19 /* Posts+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA952780BC91003A9B19 /* Posts+View.swift */; };
+		B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */; };
+		B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA9C2780C0EF003A9B19 /* Posts+Model.swift */; };
 		B0F1AFF2277B7A03009AA9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */; };
 		B0F1AFF4277B7A03009AA9BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */; };
 		B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF5277B7A03009AA9BE /* Home+View.swift */; };
@@ -52,6 +62,16 @@
 		B08CCA63278065D3003A9B19 /* Boxing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boxing.swift; sourceTree = "<group>"; };
 		B08CCA652780660A003A9B19 /* App+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+Error.swift"; sourceTree = "<group>"; };
 		B08CCA69278069D6003A9B19 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		B08CCA7527807B3A003A9B19 /* Label+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+View.swift"; sourceTree = "<group>"; };
+		B08CCA7927807F64003A9B19 /* PostTypeFilters+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeFilters+View.swift"; sourceTree = "<group>"; };
+		B08CCA7D27807F8A003A9B19 /* MostSharedFilters+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MostSharedFilters+View.swift"; sourceTree = "<group>"; };
+		B08CCA8027808B1A003A9B19 /* RadioFilters+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RadioFilters+Cell.swift"; sourceTree = "<group>"; };
+		B08CCA872780ADD4003A9B19 /* PostFilters+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostFilters+Model.swift"; sourceTree = "<group>"; };
+		B08CCA8B2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckBoxFilter+Cell.swift"; sourceTree = "<group>"; };
+		B08CCA922780B707003A9B19 /* FilterView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterView+Constraints.swift"; sourceTree = "<group>"; };
+		B08CCA952780BC91003A9B19 /* Posts+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+View.swift"; sourceTree = "<group>"; };
+		B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostView+Cell.swift"; sourceTree = "<group>"; };
+		B08CCA9C2780C0EF003A9B19 /* Posts+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+Model.swift"; sourceTree = "<group>"; };
 		B0F1AFEE277B7A03009AA9BE /* New York Times App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New York Times App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +123,7 @@
 		B08CCA5427805F47003A9B19 /* FilterView */ = {
 			isa = PBXGroup;
 			children = (
+				B08CCA862780ADB3003A9B19 /* Model */,
 				B08CCA5527805F4F003A9B19 /* View */,
 			);
 			path = FilterView;
@@ -112,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				B08CCA5627805F62003A9B19 /* Filter+View.swift */,
+				B08CCA922780B707003A9B19 /* FilterView+Constraints.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -154,6 +176,124 @@
 				B08CCA69278069D6003A9B19 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B08CCA7127807B06003A9B19 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7227807B12003A9B19 /* Components */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B08CCA7227807B12003A9B19 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA972780BD68003A9B19 /* PostsView */,
+				B08CCA7727807F41003A9B19 /* PostTypeFiltersView */,
+				B08CCA7B27807F6A003A9B19 /* MostSharedFiltersView */,
+				B08CCA7327807B21003A9B19 /* LabelView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B08CCA7327807B21003A9B19 /* LabelView */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7427807B2E003A9B19 /* View */,
+			);
+			path = LabelView;
+			sourceTree = "<group>";
+		};
+		B08CCA7427807B2E003A9B19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7527807B3A003A9B19 /* Label+View.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B08CCA7727807F41003A9B19 /* PostTypeFiltersView */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7827807F55003A9B19 /* View */,
+			);
+			path = PostTypeFiltersView;
+			sourceTree = "<group>";
+		};
+		B08CCA7827807F55003A9B19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7F27808AE6003A9B19 /* RadioFiltersCell */,
+				B08CCA7927807F64003A9B19 /* PostTypeFilters+View.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B08CCA7B27807F6A003A9B19 /* MostSharedFiltersView */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7C27807F76003A9B19 /* View */,
+			);
+			path = MostSharedFiltersView;
+			sourceTree = "<group>";
+		};
+		B08CCA7C27807F76003A9B19 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA7D27807F8A003A9B19 /* MostSharedFilters+View.swift */,
+				B08CCA8D2780AF20003A9B19 /* CheckBoxFilterCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B08CCA7F27808AE6003A9B19 /* RadioFiltersCell */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA8027808B1A003A9B19 /* RadioFilters+Cell.swift */,
+			);
+			path = RadioFiltersCell;
+			sourceTree = "<group>";
+		};
+		B08CCA862780ADB3003A9B19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA872780ADD4003A9B19 /* PostFilters+Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B08CCA8D2780AF20003A9B19 /* CheckBoxFilterCell */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA8B2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift */,
+			);
+			path = CheckBoxFilterCell;
+			sourceTree = "<group>";
+		};
+		B08CCA972780BD68003A9B19 /* PostsView */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA982780BD96003A9B19 /* PostsViewCell */,
+				B08CCA952780BC91003A9B19 /* Posts+View.swift */,
+			);
+			path = PostsView;
+			sourceTree = "<group>";
+		};
+		B08CCA982780BD96003A9B19 /* PostsViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */,
+			);
+			path = PostsViewCell;
+			sourceTree = "<group>";
+		};
+		B08CCA9B2780C0E2003A9B19 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA9C2780C0EF003A9B19 /* Posts+Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B0F1AFE5277B7A03009AA9BE = {
@@ -247,6 +387,7 @@
 		B0F1B025277B7DD7009AA9BE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B08CCA7127807B06003A9B19 /* Shared */,
 				B08CCA5F27806517003A9B19 /* PostDetailView */,
 				B08CCA5827805F8F003A9B19 /* MainCoordinator */,
 				B08CCA5427805F47003A9B19 /* FilterView */,
@@ -258,6 +399,7 @@
 		B0F1B026277B7DDF009AA9BE /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				B08CCA9B2780C0E2003A9B19 /* Model */,
 				B08CCA5327805F20003A9B19 /* View */,
 			);
 			path = HomeView;
@@ -394,8 +536,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B08CCA8C2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift in Sources */,
 				B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */,
+				B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */,
+				B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */,
+				B08CCA7627807B3A003A9B19 /* Label+View.swift in Sources */,
 				B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */,
+				B08CCA882780ADD4003A9B19 /* PostFilters+Model.swift in Sources */,
+				B08CCA8127808B1A003A9B19 /* RadioFilters+Cell.swift in Sources */,
+				B08CCA7E27807F8A003A9B19 /* MostSharedFilters+View.swift in Sources */,
+				B08CCA962780BC91003A9B19 /* Posts+View.swift in Sources */,
 				B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */,
 				B08CCA6A278069D6003A9B19 /* UIColor+Extension.swift in Sources */,
 				B0F1AFF2277B7A03009AA9BE /* AppDelegate.swift in Sources */,
@@ -403,8 +553,10 @@
 				B08CCA64278065D3003A9B19 /* Boxing.swift in Sources */,
 				B0F1AFF4277B7A03009AA9BE /* SceneDelegate.swift in Sources */,
 				B08CCA5C27805FC7003A9B19 /* Main+Coordinator.swift in Sources */,
+				B08CCA7A27807F64003A9B19 /* PostTypeFilters+View.swift in Sources */,
 				B08CCA662780660A003A9B19 /* App+Error.swift in Sources */,
 				B08CCA622780652E003A9B19 /* PostDetail+View.swift in Sources */,
+				B08CCA932780B707003A9B19 /* FilterView+Constraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

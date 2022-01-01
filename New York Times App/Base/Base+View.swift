@@ -12,6 +12,7 @@ class BaseViewController<CoordinatorType>: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.colorCatalog(name: .primaryBackground)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

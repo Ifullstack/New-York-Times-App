@@ -33,8 +33,14 @@ final class MainCoordinator: NSObject, Coordinator {
 // MARK: - Internal Navigation
 extension MainCoordinator {
     func goToHomeView() {
+        let view = HomeViewController()
+        view.coordinator = self
+        navigationController.pushViewController(view, animated: true)
+    }
+    
+    func goToFilterView() {
         let view = FilterViewController()
-        
+        view.coordinator = self
         navigationController.pushViewController(view, animated: true)
     }
 }
