@@ -14,6 +14,7 @@
 		B08CCA622780652E003A9B19 /* PostDetail+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA612780652E003A9B19 /* PostDetail+View.swift */; };
 		B08CCA64278065D3003A9B19 /* Boxing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA63278065D3003A9B19 /* Boxing.swift */; };
 		B08CCA662780660A003A9B19 /* App+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA652780660A003A9B19 /* App+Error.swift */; };
+		B08CCA6A278069D6003A9B19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA69278069D6003A9B19 /* UIColor+Extension.swift */; };
 		B0F1AFF2277B7A03009AA9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */; };
 		B0F1AFF4277B7A03009AA9BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */; };
 		B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF5277B7A03009AA9BE /* Home+View.swift */; };
@@ -50,6 +51,7 @@
 		B08CCA612780652E003A9B19 /* PostDetail+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostDetail+View.swift"; sourceTree = "<group>"; };
 		B08CCA63278065D3003A9B19 /* Boxing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boxing.swift; sourceTree = "<group>"; };
 		B08CCA652780660A003A9B19 /* App+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+Error.swift"; sourceTree = "<group>"; };
+		B08CCA69278069D6003A9B19 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		B0F1AFEE277B7A03009AA9BE /* New York Times App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New York Times App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B08CCA67278069B2003A9B19 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA68278069C3003A9B19 /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B08CCA68278069C3003A9B19 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B08CCA69278069D6003A9B19 /* UIColor+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B0F1AFE5277B7A03009AA9BE = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +179,7 @@
 		B0F1AFF0277B7A03009AA9BE /* New York Times App */ = {
 			isa = PBXGroup;
 			children = (
+				B08CCA67278069B2003A9B19 /* Helpers */,
 				B0F1AFFF277B7A03009AA9BE /* Info.plist */,
 				B0F1B022277B7DBC009AA9BE /* Features */,
 				B0F1B021277B7D9E009AA9BE /* Base */,
@@ -378,6 +397,7 @@
 				B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */,
 				B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */,
 				B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */,
+				B08CCA6A278069D6003A9B19 /* UIColor+Extension.swift in Sources */,
 				B0F1AFF2277B7A03009AA9BE /* AppDelegate.swift in Sources */,
 				B08CCA5E27806180003A9B19 /* Base+View.swift in Sources */,
 				B08CCA64278065D3003A9B19 /* Boxing.swift in Sources */,
