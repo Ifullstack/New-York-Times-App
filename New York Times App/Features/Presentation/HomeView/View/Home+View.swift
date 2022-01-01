@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: BaseViewController<MainCoordinator> {
     
+    private let viewModel: HomeViewModel = DefaultHomeViewModel()
+    
     private var postsView: PostsView = {
         let postsView = PostsView(frame: .zero)
         postsView.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +20,20 @@ class HomeViewController: BaseViewController<MainCoordinator> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.viewDidLoad()
         setupView()
+        setupBinding()
+    }
+}
+
+// MARK: - Setup Binding
+extension HomeViewController {
+    private func setupBinding() {
+        viewModel.postsModel.bind(listener: {  model in
+            guard let model = model else { return }
+            
+            self.setupPostsView(from: model)
+        })
     }
 }
 
@@ -27,7 +42,7 @@ extension HomeViewController {
     private func setupView() {
         setupNavigationBar()
         view.addSubview(postsView)
-        setupPostsView()
+        
         
         
         setupConstraints()
@@ -42,60 +57,9 @@ extension HomeViewController {
         }
     }
     
-    private func setupPostsView() {
+    private func setupPostsView(from model: [PostsModel]) {
         DispatchQueue.main.async {
-            self.postsView.configureView(from: [
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title",
-                           autor: "Autor",
-                           section: "Section",
-                           publicationDate: "Publication Date"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title 2",
-                           autor: "Autor 2",
-                           section: "Section 2",
-                           publicationDate: "Publication Date 2"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title",
-                           autor: "Autor",
-                           section: "Section",
-                           publicationDate: "Publication Date"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title 2",
-                           autor: "Autor 2",
-                           section: "Section 2",
-                           publicationDate: "Publication Date 2"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title",
-                           autor: "Autor",
-                           section: "Section",
-                           publicationDate: "Publication Date"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title 2",
-                           autor: "Autor 2",
-                           section: "Section 2",
-                           publicationDate: "Publication Date 2"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title",
-                           autor: "Autor",
-                           section: "Section",
-                           publicationDate: "Publication Date"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title 2",
-                           autor: "Autor 2",
-                           section: "Section 2",
-                           publicationDate: "Publication Date 2"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title",
-                           autor: "Autor",
-                           section: "Section",
-                           publicationDate: "Publication Date"),
-                PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                           title: "Title 2",
-                           autor: "Autor 2",
-                           section: "Section 2",
-                           publicationDate: "Publication Date 2")
-            ])
+            self.postsView.configureView(from: model)
         }
        
     }
@@ -112,7 +76,7 @@ extension HomeViewController {
 extension HomeViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            postsView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            postsView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
             postsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             postsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             postsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

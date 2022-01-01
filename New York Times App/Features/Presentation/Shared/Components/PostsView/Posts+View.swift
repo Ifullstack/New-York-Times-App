@@ -40,10 +40,7 @@ class PostsView: UIView {
     }
     
     // MARK: Setup
-    private func setupView() {
-        layer.cornerRadius = 20
-        backgroundColor = UIColor.colorCatalog(name: .blurBackGround)
-    
+    private func setupView() {    
         addSubview(tableView)
     
         tableView.register(PostViewCell.self, forCellReuseIdentifier: Cells.postsCellId)
@@ -85,12 +82,14 @@ extension PostsView: UITableViewDelegate, UITableViewDataSource {
               let model = postsModel?[indexPath.row] else {
             return UITableViewCell()
         }
-        
+  
+        cell.backgroundColor = .clear
         cell.configureCell(from: model)
         return cell
     }
     
+    // TODO: Mejorar este height estático y si no me gusta cambiar a una collection
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(150)
+        return CGFloat(255)
     }
 }

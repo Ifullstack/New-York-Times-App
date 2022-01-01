@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B02791D02780E79700E27315 /* Home+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02791CF2780E79700E27315 /* Home+ViewModel.swift */; };
+		B02791D32780EA0400E27315 /* Filter+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02791D22780EA0400E27315 /* Filter+ViewModel.swift */; };
 		B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5627805F62003A9B19 /* Filter+View.swift */; };
 		B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5927805FA0003A9B19 /* Coordinator.swift */; };
 		B08CCA5C27805FC7003A9B19 /* Main+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5B27805FC7003A9B19 /* Main+Coordinator.swift */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B02791CF2780E79700E27315 /* Home+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+ViewModel.swift"; sourceTree = "<group>"; };
+		B02791D22780EA0400E27315 /* Filter+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filter+ViewModel.swift"; sourceTree = "<group>"; };
 		B08CCA5627805F62003A9B19 /* Filter+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filter+View.swift"; sourceTree = "<group>"; };
 		B08CCA5927805FA0003A9B19 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B08CCA5B27805FC7003A9B19 /* Main+Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Coordinator.swift"; sourceTree = "<group>"; };
@@ -112,6 +116,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B02791CE2780E77A00E27315 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B02791CF2780E79700E27315 /* Home+ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B02791D12780E9EF00E27315 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B02791D22780EA0400E27315 /* Filter+ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B08CCA5327805F20003A9B19 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +143,7 @@
 		B08CCA5427805F47003A9B19 /* FilterView */ = {
 			isa = PBXGroup;
 			children = (
+				B02791D12780E9EF00E27315 /* ViewModel */,
 				B08CCA862780ADB3003A9B19 /* Model */,
 				B08CCA5527805F4F003A9B19 /* View */,
 			);
@@ -399,6 +420,7 @@
 		B0F1B026277B7DDF009AA9BE /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				B02791CE2780E77A00E27315 /* ViewModel */,
 				B08CCA9B2780C0E2003A9B19 /* Model */,
 				B08CCA5327805F20003A9B19 /* View */,
 			);
@@ -537,10 +559,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B08CCA8C2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift in Sources */,
+				B02791D32780EA0400E27315 /* Filter+ViewModel.swift in Sources */,
 				B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */,
 				B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */,
 				B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */,
 				B08CCA7627807B3A003A9B19 /* Label+View.swift in Sources */,
+				B02791D02780E79700E27315 /* Home+ViewModel.swift in Sources */,
 				B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */,
 				B08CCA882780ADD4003A9B19 /* PostFilters+Model.swift in Sources */,
 				B08CCA8127808B1A003A9B19 /* RadioFilters+Cell.swift in Sources */,

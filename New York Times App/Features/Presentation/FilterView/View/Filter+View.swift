@@ -101,7 +101,7 @@ extension FilterViewController {
     
     private func setupPostTypeFilterView() {
         scrollView.addSubview(postTypeFilterView)
-        var models = [
+        let models = [
             PostFiltersModel(filterName: "Most Mailed", filterTag: 1),
             PostFiltersModel(filterName: "Most Shared", filterTag: 2),
             PostFiltersModel(filterName: "Most Viewed", filterTag: 3)
