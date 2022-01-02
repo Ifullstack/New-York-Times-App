@@ -7,7 +7,12 @@
 
 import Foundation
 
+enum FilterTypes {
+    case period, postType, mostSharedType
+}
+
 struct PostFiltersModel {
     let filterName: String
-    let filterTag: Int
+    let filterType: FilterTypes
+    let filterValue: String
 }

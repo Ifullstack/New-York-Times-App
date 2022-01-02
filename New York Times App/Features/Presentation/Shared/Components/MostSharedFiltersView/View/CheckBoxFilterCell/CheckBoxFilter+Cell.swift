@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol CheckBoxFiltersCellProtocol {
+    func checkBoxSelected(model: PostFiltersModel, isSelected: Bool)
+}
 
 class CheckBoxFiltersCell: UITableViewCell {
+   
+    private var model: PostFiltersModel?
+    
+    var delegate: CheckBoxFiltersCellProtocol?
     
     private var containerView: UIView = {
         let containerView = UIView(frame: .zero)
@@ -24,14 +31,14 @@ class CheckBoxFiltersCell: UITableViewCell {
         return labelView
     }()
         
-    private var radioButton: UIButton = {
-        let radioButton = UIButton(frame: .zero)
-        radioButton.addTarget(self, action: #selector(radioButtonTapped), for: .touchUpInside)
-        radioButton.translatesAutoresizingMaskIntoConstraints = false
-        radioButton.setImage(UIImage(named: "check_box_off"), for: .normal)
-        radioButton.setImage(UIImage(named: "check_box_on"), for: .selected)
+    private var checkBoxButton: UIButton = {
+        let checkBoxButton = UIButton(frame: .zero)
+        checkBoxButton.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
+        checkBoxButton.translatesAutoresizingMaskIntoConstraints = false
+        checkBoxButton.setImage(UIImage(named: "check_box_off"), for: .normal)
+        checkBoxButton.setImage(UIImage(named: "check_box_on"), for: .selected)
         
-        return radioButton
+        return checkBoxButton
     }()
     
     private var lineSeparator: UIView = {
@@ -61,22 +68,17 @@ class CheckBoxFiltersCell: UITableViewCell {
 // MARK: - Public Methods
 extension CheckBoxFiltersCell {
     func configureCell(from model: PostFiltersModel) {
+        self.model = model
         DispatchQueue.main.async {
             self.labelView.configureView(with: model.filterName,
                                     and: UIFont.systemFont(ofSize: 16, weight: .semibold))
             
         }
     }
-    
-    private func radioButtonSetSelected(isSelected: Bool) {
-        
-        radioButton.isSelected = isSelected
-    }
 }
 
 // MARK: - Setup View
 extension CheckBoxFiltersCell {
-    
     private func setupView() {
         backgroundColor = .clear
         
@@ -97,7 +99,7 @@ extension CheckBoxFiltersCell {
     }
     
     private func setupRadioButton() {
-        containerView.addSubview(radioButton)
+        containerView.addSubview(checkBoxButton)
         setupRadioButtonConstraints()
     }
     
@@ -107,18 +109,12 @@ extension CheckBoxFiltersCell {
     }
 }
 
+// MARK: - User Actions
 extension CheckBoxFiltersCell {
-    @objc func radioButtonTapped() {
-//        if let parentTableView = superview as? UITableView {
-//            parentTableView.visibleCells.forEach { cell in
-//                if let cell = cell as? Self {
-//                    cell.radioButtonSetSelected(isSelected: false)
-//                }
-//            }
-//            self.radioButtonSetSelected(isSelected: true)
-//        }
-     //   self.radioButtonSetSelected(isSelected: true)
-        radioButton.isSelected.toggle()
+    @objc func checkBoxTapped() {
+        guard let model = model else { return }
+        delegate?.checkBoxSelected(model: model, isSelected: !checkBoxButton.isSelected)
+        checkBoxButton.isSelected.toggle()
     }
 }
 
@@ -143,8 +139,8 @@ extension CheckBoxFiltersCell {
     
     private func setupRadioButtonConstraints() {
         NSLayoutConstraint.activate([
-            radioButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            radioButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            checkBoxButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            checkBoxButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
         ])
     }
     

@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol RadioFiltersCellProtocol {
+    func radioButtonTapped(model: PostFiltersModel)
+}
 
 class RadioFiltersCell: UITableViewCell {
+    
+    private var model: PostFiltersModel?
+    
+    var delegate: RadioFiltersCellProtocol?
     
     private var containerView: UIView = {
         let containerView = UIView(frame: .zero)
@@ -61,6 +68,7 @@ class RadioFiltersCell: UITableViewCell {
 // MARK: - Public Methods
 extension RadioFiltersCell {
     func configureCell(from model: PostFiltersModel) {
+        self.model = model
         DispatchQueue.main.async {
             self.labelView.configureView(with: model.filterName,
                                     and: UIFont.systemFont(ofSize: 16, weight: .semibold))
@@ -106,6 +114,7 @@ extension RadioFiltersCell {
     }
 }
 
+// MARK: - User Actions
 extension RadioFiltersCell {
     @objc func radioButtonTapped() {
         if let parentTableView = superview as? UITableView {
@@ -116,6 +125,8 @@ extension RadioFiltersCell {
             }
             self.radioButtonSetSelected(isSelected: true)
         }
+        guard let model = model else { return }
+        delegate?.radioButtonTapped(model: model)
     }
 }
 

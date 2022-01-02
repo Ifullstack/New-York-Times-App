@@ -14,7 +14,9 @@ extension MostSharedFiltersView {
 }
 
 class MostSharedFiltersView: UIView {
-        
+    
+    var delegate: CheckBoxFiltersCellProtocol?
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +94,7 @@ extension MostSharedFiltersView: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configureCell(from: model)
+        cell.delegate = delegate
         return cell
     }
 }

@@ -14,7 +14,9 @@ extension PostFiltersView {
 }
 
 class PostFiltersView: UIView {
-        
+    
+    var delegate: RadioFiltersCellProtocol?
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +30,6 @@ class PostFiltersView: UIView {
         }
     }
     
-
-
     // MARK: View lifeCycle
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,6 +94,7 @@ extension PostFiltersView: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configureCell(from: model)
+        cell.delegate = delegate
         return cell
     }
 }
