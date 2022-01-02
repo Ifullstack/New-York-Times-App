@@ -11,6 +11,13 @@
 		B02791D32780EA0400E27315 /* Filter+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02791D22780EA0400E27315 /* Filter+ViewModel.swift */; };
 		B06A20D127819DC100692614 /* Spinner+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20D027819DC100692614 /* Spinner+Status.swift */; };
 		B06A20D42781A5C500692614 /* Shared+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20D32781A5C500692614 /* Shared+ViewModel.swift */; };
+		B06A20DB2781B9AA00692614 /* FetchPost+UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20DA2781B9AA00692614 /* FetchPost+UseCase.swift */; };
+		B06A20DD2781B9B500692614 /* FetchPostUseCase+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20DC2781B9B500692614 /* FetchPostUseCase+Parameters.swift */; };
+		B06A20DF2781B9C600692614 /* Domain+Interfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20DE2781B9C600692614 /* Domain+Interfaces.swift */; };
+		B06A20E12781B9D500692614 /* Posts+Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E02781B9D500692614 /* Posts+Entity.swift */; };
+		B06A20E32781B9ED00692614 /* FetchPost+Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E22781B9ED00692614 /* FetchPost+Repository.swift */; };
+		B06A20E52781B9FC00692614 /* FetchPostRepository+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E42781B9FC00692614 /* FetchPostRepository+Parameters.swift */; };
+		B06A20E72781BA0800692614 /* Posts+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E62781BA0800692614 /* Posts+Decodable.swift */; };
 		B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5627805F62003A9B19 /* Filter+View.swift */; };
 		B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5927805FA0003A9B19 /* Coordinator.swift */; };
 		B08CCA5C27805FC7003A9B19 /* Main+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5B27805FC7003A9B19 /* Main+Coordinator.swift */; };
@@ -62,6 +69,13 @@
 		B02791D22780EA0400E27315 /* Filter+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filter+ViewModel.swift"; sourceTree = "<group>"; };
 		B06A20D027819DC100692614 /* Spinner+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spinner+Status.swift"; sourceTree = "<group>"; };
 		B06A20D32781A5C500692614 /* Shared+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shared+ViewModel.swift"; sourceTree = "<group>"; };
+		B06A20DA2781B9AA00692614 /* FetchPost+UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPost+UseCase.swift"; sourceTree = "<group>"; };
+		B06A20DC2781B9B500692614 /* FetchPostUseCase+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPostUseCase+Parameters.swift"; sourceTree = "<group>"; };
+		B06A20DE2781B9C600692614 /* Domain+Interfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Domain+Interfaces.swift"; sourceTree = "<group>"; };
+		B06A20E02781B9D500692614 /* Posts+Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+Entity.swift"; sourceTree = "<group>"; };
+		B06A20E22781B9ED00692614 /* FetchPost+Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPost+Repository.swift"; sourceTree = "<group>"; };
+		B06A20E42781B9FC00692614 /* FetchPostRepository+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPostRepository+Parameters.swift"; sourceTree = "<group>"; };
+		B06A20E62781BA0800692614 /* Posts+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+Decodable.swift"; sourceTree = "<group>"; };
 		B08CCA5627805F62003A9B19 /* Filter+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filter+View.swift"; sourceTree = "<group>"; };
 		B08CCA5927805FA0003A9B19 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B08CCA5B27805FC7003A9B19 /* Main+Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Coordinator.swift"; sourceTree = "<group>"; };
@@ -142,6 +156,48 @@
 				B06A20D32781A5C500692614 /* Shared+ViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B06A20D52781B95200692614 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				B06A20DA2781B9AA00692614 /* FetchPost+UseCase.swift */,
+				B06A20DC2781B9B500692614 /* FetchPostUseCase+Parameters.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		B06A20D62781B95D00692614 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				B06A20E02781B9D500692614 /* Posts+Entity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		B06A20D72781B96400692614 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				B06A20DE2781B9C600692614 /* Domain+Interfaces.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		B06A20D82781B96D00692614 /* Decodable */ = {
+			isa = PBXGroup;
+			children = (
+				B06A20E62781BA0800692614 /* Posts+Decodable.swift */,
+			);
+			path = Decodable;
+			sourceTree = "<group>";
+		};
+		B06A20D92781B97300692614 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B06A20E22781B9ED00692614 /* FetchPost+Repository.swift */,
+				B06A20E42781B9FC00692614 /* FetchPostRepository+Parameters.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		B08CCA5327805F20003A9B19 /* View */ = {
@@ -408,6 +464,8 @@
 		B0F1B023277B7DCC009AA9BE /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				B06A20D92781B97300692614 /* Repositories */,
+				B06A20D82781B96D00692614 /* Decodable */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -415,6 +473,9 @@
 		B0F1B024277B7DD2009AA9BE /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				B06A20D72781B96400692614 /* Interfaces */,
+				B06A20D62781B95D00692614 /* Entities */,
+				B06A20D52781B95200692614 /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -573,11 +634,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B08CCA8C2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift in Sources */,
+				B06A20E12781B9D500692614 /* Posts+Entity.swift in Sources */,
+				B06A20E32781B9ED00692614 /* FetchPost+Repository.swift in Sources */,
+				B06A20DF2781B9C600692614 /* Domain+Interfaces.swift in Sources */,
 				B02791D32780EA0400E27315 /* Filter+ViewModel.swift in Sources */,
 				B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */,
 				B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */,
+				B06A20E72781BA0800692614 /* Posts+Decodable.swift in Sources */,
+				B06A20DB2781B9AA00692614 /* FetchPost+UseCase.swift in Sources */,
 				B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */,
 				B08CCA7627807B3A003A9B19 /* Label+View.swift in Sources */,
+				B06A20E52781B9FC00692614 /* FetchPostRepository+Parameters.swift in Sources */,
 				B02791D02780E79700E27315 /* Home+ViewModel.swift in Sources */,
 				B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */,
 				B08CCA882780ADD4003A9B19 /* PostFilters+Model.swift in Sources */,
@@ -594,6 +661,7 @@
 				B0F1AFF4277B7A03009AA9BE /* SceneDelegate.swift in Sources */,
 				B08CCA5C27805FC7003A9B19 /* Main+Coordinator.swift in Sources */,
 				B08CCA7A27807F64003A9B19 /* PostTypeFilters+View.swift in Sources */,
+				B06A20DD2781B9B500692614 /* FetchPostUseCase+Parameters.swift in Sources */,
 				B08CCA662780660A003A9B19 /* App+Error.swift in Sources */,
 				B08CCA622780652E003A9B19 /* PostDetail+View.swift in Sources */,
 				B08CCA932780B707003A9B19 /* FilterView+Constraints.swift in Sources */,
