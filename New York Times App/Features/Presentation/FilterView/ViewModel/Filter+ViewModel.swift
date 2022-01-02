@@ -26,6 +26,29 @@ protocol FilterViewModel: FilterViewModelInput,
                           RadioFiltersCellProtocol,
                           CheckBoxFiltersCellProtocol {}
 
+extension DefaultFilterViewModel {
+    enum FilterNames {
+        static let oneDay = "1 día"
+        static let sevenDays = "7 días"
+        static let thirtyDays = "30 días"
+        static let mostMailed = "Most Mailed"
+        static let mostShared = "Most Shared"
+        static let mostViewed = "Most Viewed"
+        static let facebook = "Facebook"
+        static let twitter = "Twitter"
+    }
+    enum FilterValues {
+        static let oneDay = "1"
+        static let sevenDays = "7"
+        static let thirtyDays = "30"
+        static let mostMailed = "emailed"
+        static let mostShared = "shared"
+        static let mostViewed = "viewed"
+        static let facebook = "facebook"
+        static let twitter = "twitter"
+    }
+}
+
 class DefaultFilterViewModel: FilterViewModel {
     
     // Bindings
@@ -38,13 +61,7 @@ class DefaultFilterViewModel: FilterViewModel {
  
     // Exposed Properties
     var sharedViewModel: SharedViewModel?
-    
-    private var periodSelected: String = "1"
-    private var postTypeSelected: String = "viewed"
-    private var mostSharedSelected: String = ""
-    // I think NYC API it only uses facebook as shared type, so I am not using this feature
-    //private var mostSharedSelected: [String] = []
-    
+
     init(sharedViewModel: SharedViewModel) {
         self.sharedViewModel = sharedViewModel
     }
@@ -55,31 +72,62 @@ class DefaultFilterViewModel: FilterViewModel {
     }
     
     func doneButtonTapped() {
-        sharedViewModel?.fetchPosts(parameters: FetchPostsUseCaseParameters(postType: postTypeSelected,
-                                                                            period: periodSelected,
-                                                                            sharedType: mostSharedSelected))
+        sharedViewModel?.fetchPosts(parameters: FetchPostsUseCaseParameters(postType: sharedViewModel?.postTypeSelected ?? "",
+                                                                            period: sharedViewModel?.periodSelected ?? "",
+                                                                            sharedType: sharedViewModel?.sharedTypeSelected ?? ""))
     }
 }
 
 // MARK: - Private Methods
 extension DefaultFilterViewModel {
-    // TODO: Pasar los nombres y las values a una enum de constantes
+  
     private func fetchFiltersModel() {
+        guard let sharedViewModel = sharedViewModel else { return }
+        
         postsPeriodFiltersModel.value = [
-            PostFiltersModel(filterName: "1 día", filterType: .period, filterValue: "1"),
-            PostFiltersModel(filterName: "7 días", filterType: .period, filterValue: "7"),
-            PostFiltersModel(filterName: "30 días", filterType: .period, filterValue: "30")
+            PostFiltersModel(filterName: FilterNames.oneDay,
+                             filterType: .period,
+                             filterValue: FilterValues.oneDay,
+                             isFilterSelected: sharedViewModel.periodSelected == FilterValues.oneDay ? true : false),
+            
+            PostFiltersModel(filterName: FilterNames.sevenDays,
+                             filterType: .period,
+                             filterValue: FilterValues.sevenDays,
+                             isFilterSelected: sharedViewModel.periodSelected == FilterValues.sevenDays ? true : false),
+            
+            PostFiltersModel(filterName: FilterNames.thirtyDays,
+                             filterType: .period,
+                             filterValue: FilterValues.thirtyDays,
+                             isFilterSelected: sharedViewModel.periodSelected == FilterValues.thirtyDays ? true : false)
         ]
         
         postsTypeFiltersModel.value = [
-            PostFiltersModel(filterName: "Most Mailed", filterType: .postType, filterValue: "emailed"),
-            PostFiltersModel(filterName: "Most Shared", filterType: .postType, filterValue: "shared"),
-            PostFiltersModel(filterName: "Most Viewed", filterType: .postType, filterValue: "viewed")
+            PostFiltersModel(filterName: FilterNames.mostMailed,
+                             filterType: .postType,
+                             filterValue: FilterValues.mostMailed,
+                             isFilterSelected: sharedViewModel.postTypeSelected == FilterValues.mostMailed ? true : false),
+            
+            PostFiltersModel(filterName: FilterNames.mostShared,
+                             filterType: .postType,
+                             filterValue: FilterValues.mostShared,
+                             isFilterSelected: sharedViewModel.postTypeSelected == FilterValues.mostShared ? true : false),
+            
+            PostFiltersModel(filterName: FilterNames.mostViewed,
+                             filterType: .postType,
+                             filterValue: FilterValues.mostViewed,
+                             isFilterSelected: sharedViewModel.postTypeSelected == FilterValues.mostViewed ? true : false)
         ]
         
         mostSharedFiltersModel.value = [
-            PostFiltersModel(filterName: "Facebook", filterType: .mostSharedType, filterValue: "facebook"),
-            PostFiltersModel(filterName: "Twitter", filterType: .mostSharedType, filterValue: "twitter")
+            PostFiltersModel(filterName: FilterNames.facebook,
+                             filterType: .mostSharedType,
+                             filterValue: FilterValues.facebook,
+                             isFilterSelected: sharedViewModel.sharedTypeSelected == FilterValues.facebook ? true : false),
+            
+            PostFiltersModel(filterName: FilterNames.twitter,
+                             filterType: .mostSharedType,
+                             filterValue: FilterValues.twitter,
+                             isFilterSelected: sharedViewModel.sharedTypeSelected == FilterValues.twitter ? true : false)
         ]
         spinnerStatus.value = .stop
     }
@@ -90,12 +138,12 @@ extension DefaultFilterViewModel {
     func radioButtonTapped(model: PostFiltersModel) {
         switch model.filterType {
             case .period:
-                self.periodSelected = model.filterValue
+                self.sharedViewModel?.periodSelected = model.filterValue
             case .postType:
-                self.postTypeSelected = model.filterValue
-            self.mostSharedSelected  = model.filterName == "Most Shared" ? "facebook" : ""
+                self.sharedViewModel?.postTypeSelected = model.filterValue
+                self.sharedViewModel?.sharedTypeSelected = model.filterName == "Most Shared" ? "facebook" : ""
             case .mostSharedType:
-                self.mostSharedSelected = "facebook"
+                self.sharedViewModel?.sharedTypeSelected = "facebook"
         }
     }
 }

@@ -15,4 +15,5 @@ struct PostFiltersModel {
     let filterName: String
     let filterType: FilterTypes
     let filterValue: String
+    let isFilterSelected: Bool
 }

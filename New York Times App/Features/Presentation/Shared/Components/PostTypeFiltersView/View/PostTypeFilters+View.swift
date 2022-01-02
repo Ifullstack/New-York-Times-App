@@ -57,8 +57,6 @@ class PostFiltersView: UIView {
         tableView.alwaysBounceVertical = false
         tableView.alwaysBounceHorizontal = false
         tableView.isScrollEnabled = false
-        
-        
         tableView.reloadData()
         
         setupConstraints()
@@ -88,7 +86,7 @@ extension PostFiltersView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.radioFiltersCellId) as? RadioFiltersCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.radioFiltersCellId) as? RadioFiltersCell, 
               let model = radioFilterCellModel?[indexPath.row] else {
             return UITableViewCell()
         }

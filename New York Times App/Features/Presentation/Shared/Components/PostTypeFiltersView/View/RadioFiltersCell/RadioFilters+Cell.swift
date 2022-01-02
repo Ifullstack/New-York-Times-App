@@ -73,6 +73,7 @@ extension RadioFiltersCell {
             self.labelView.configureView(with: model.filterName,
                                     and: UIFont.systemFont(ofSize: 16, weight: .semibold))
             
+            self.radioButtonSetSelected(isSelected: model.isFilterSelected ?? false)
         }
     }
     
