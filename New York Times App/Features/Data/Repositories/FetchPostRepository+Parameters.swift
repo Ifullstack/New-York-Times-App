@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct FetchPostsRespositoryParameters {
+    let postType: String
+    let period: String
+    let sharedType: String
+}

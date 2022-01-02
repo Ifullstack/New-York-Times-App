@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct FetchPostsUseCaseParameters {
+    let postType: String
+    let period: String
+    let sharedType: String
+}
