@@ -4,7 +4,7 @@
 
 ## User settings
 xcuserdata/
-*/New York Times App/Base/App+APIKey.swift
+/New York Times App/Base/App+APIKey.swift
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
