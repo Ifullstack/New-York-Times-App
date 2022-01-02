@@ -50,9 +50,13 @@ extension BaseViewController {
 // MARK: - Alert Error
 extension BaseViewController {
     func showErrorAlert() {
-        let alertCtrl = UIAlertController(title: "Error during the process", message: "An unexpected error has occurred", preferredStyle: .alert)
-        alertCtrl.addAction(UIAlertAction(title: "Dismiss", style: .destructive))
+        DispatchQueue.main.async {
+            let alertCtrl = UIAlertController(title: "Error during the process", message: "An unexpected error has occurred", preferredStyle: .alert)
+            alertCtrl.addAction(UIAlertAction(title: "Dismiss", style: .destructive, handler: { action in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alertCtrl, animated: true, completion: nil)
+        }
         
-        self.present(alertCtrl, animated: true, completion: nil)
     }
 }

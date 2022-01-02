@@ -33,6 +33,10 @@ class DefaultFetchPostsUseCase: FetchPostsUseCase {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let decodable):
+                guard let _ = decodable.results else {
+                    completion(.failure(AppError.unExpectedError))
+                    return
+                }
                 completion(.success(PostsEntity(decodable: decodable)))
             }
         }

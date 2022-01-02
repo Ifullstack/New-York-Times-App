@@ -17,7 +17,6 @@ extension DefaultFetchPostsRepository {
 }
 
 class DefaultFetchPostsRepository: FetchPostsRepository {
-    
 
     func fetchPosts(parameters: FetchPostsRespositoryParameters,
                     completion: @escaping (Result<PostsDecodable, Error>) -> Void) {
@@ -30,7 +29,6 @@ class DefaultFetchPostsRepository: FetchPostsRepository {
             return
         }
         
- 
         URLSession.shared.dataTask(with: url) { data, _, error in
             
             if let error = error {
@@ -49,6 +47,7 @@ class DefaultFetchPostsRepository: FetchPostsRepository {
             } catch {
                 completion(.failure(error))
             }
+            
         }.resume()
     }
 }

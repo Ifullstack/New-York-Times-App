@@ -40,7 +40,7 @@ struct ResultsDecodable: Codable {
         case uri, url, id
         case assetID
         case source
-        case publishedDate
+        case publishedDate = "published_date"
         case updated, section, subsection, nytdsection
         case adxKeywords
         case column, byline, type, title, abstract
