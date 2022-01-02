@@ -29,10 +29,25 @@ class HomeViewController: BaseViewController<MainCoordinator> {
 // MARK: - Setup Binding
 extension HomeViewController {
     private func setupBinding() {
-        viewModel.postsModel.bind(listener: {  model in
+        viewModel.sharedViewModel?.postsModel.bind(listener: {  model in
             guard let model = model else { return }
             
             self.setupPostsView(from: model)
+        })
+        
+        viewModel.sharedViewModel?.spinnerStatus.bind(listener: { status in
+            guard let status = status else { return }
+            switch status {
+                case .start:
+                    self.showSpinner(onView: self.view)
+                case .stop:
+                    self.removeSpinner()
+            }
+        })
+        
+        viewModel.sharedViewModel?.error.bind(listener: {  error in
+            guard let _ = error else { return }
+            self.showErrorAlert()
         })
     }
 }
@@ -42,9 +57,6 @@ extension HomeViewController {
     private func setupView() {
         setupNavigationBar()
         view.addSubview(postsView)
-        
-        
-        
         setupConstraints()
     }
     
@@ -53,22 +65,24 @@ extension HomeViewController {
             let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(self.filterButtonTapped))
             self.navigationItem.rightBarButtonItem = filterButton
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            self.title = "Featured"
+            self.title = "New York Times"
         }
     }
     
-    private func setupPostsView(from model: [PostsModel]) {
+    private func setupPostsView(from models: [PostsModel]) {
         DispatchQueue.main.async {
-            self.postsView.configureView(from: model)
+            self.postsView.configureView(from: models)
         }
-       
     }
 }
 
 // MARK: - User Actions
 extension HomeViewController {
     @objc func filterButtonTapped() {
-        coordinator?.goToFilterView()
+        guard let sharedViewModel = viewModel.sharedViewModel else {
+            return
+        }
+        coordinator?.goToFilterView(sharedViewModel: sharedViewModel)
     }
 }
 

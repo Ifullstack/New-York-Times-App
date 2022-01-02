@@ -38,9 +38,10 @@ extension MainCoordinator {
         navigationController.pushViewController(view, animated: true)
     }
     
-    func goToFilterView() {
+    func goToFilterView(sharedViewModel: SharedViewModel) {
         let view = FilterViewController()
         view.coordinator = self
+        view.viewModel = DefaultFilterViewModel(sharedViewModel: sharedViewModel)
         navigationController.pushViewController(view, animated: true)
     }
 }

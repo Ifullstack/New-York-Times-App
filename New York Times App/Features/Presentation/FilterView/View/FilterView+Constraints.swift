@@ -19,9 +19,27 @@ extension FilterViewController {
         ])
     }
     
+    func setupPeriodLabelViewConstraints() {
+        NSLayoutConstraint.activate([
+            periodLabelView.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 20),
+            periodLabelView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16)
+        ])
+    }
+    
+    func setupPeriodFilterViewConstraint() {
+        // TODO: Improve this constraints without static height
+        NSLayoutConstraint.activate([
+            periodFilterView.topAnchor.constraint(equalTo: periodLabelView.bottomAnchor, constant: 20),
+            periodFilterView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            periodFilterView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            periodFilterView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
+            periodFilterView.heightAnchor.constraint(equalToConstant: CGFloat(180))
+        ])
+    }
+    
     func setupTopicLabelViewConstraints() {
         NSLayoutConstraint.activate([
-            topicLabelView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            topicLabelView.topAnchor.constraint(equalTo: periodFilterView.bottomAnchor, constant: 20),
             topicLabelView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16)
         ])
     }
@@ -55,21 +73,5 @@ extension FilterViewController {
         ])
     }
     
-    func setupPeriodLabelViewConstraints() {
-        NSLayoutConstraint.activate([
-            periodLabelView.topAnchor.constraint(equalTo: mostSharedFiltersView.bottomAnchor, constant: 20),
-            periodLabelView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16)
-        ])
-    }
     
-    func setupPeriodFilterViewConstraint() {
-        // TODO: Improve this constraints without static height
-        NSLayoutConstraint.activate([
-            periodFilterView.topAnchor.constraint(equalTo: periodLabelView.bottomAnchor, constant: 20),
-            periodFilterView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            periodFilterView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            periodFilterView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
-            periodFilterView.heightAnchor.constraint(equalToConstant: CGFloat(180))
-        ])
-    }
 }

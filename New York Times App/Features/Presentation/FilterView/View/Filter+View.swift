@@ -9,6 +9,8 @@ import UIKit
 
 final class FilterViewController: BaseViewController<MainCoordinator> {
     
+    var viewModel: FilterViewModel?
+    
     private(set) var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +37,7 @@ final class FilterViewController: BaseViewController<MainCoordinator> {
     private(set) var mostSharedLabelView: LabelView = {
         let mostSharedLabelView = LabelView(frame: .zero)
         mostSharedLabelView.translatesAutoresizingMaskIntoConstraints = false
+        mostSharedLabelView.isHidden = true
         
         return mostSharedLabelView
     }()
@@ -42,6 +45,7 @@ final class FilterViewController: BaseViewController<MainCoordinator> {
     private(set) var mostSharedFiltersView: MostSharedFiltersView = {
         let mostSharedFiltersView = MostSharedFiltersView(frame: .zero)
         mostSharedFiltersView.translatesAutoresizingMaskIntoConstraints = false
+        mostSharedFiltersView.isHidden = true
         
         return mostSharedFiltersView
     }()
@@ -62,7 +66,56 @@ final class FilterViewController: BaseViewController<MainCoordinator> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.viewDidLoad()
         setupView()
+        setupBinding()
+    }
+}
+
+// MARK: - Setup Bindings
+extension FilterViewController {
+    private func setupBinding() {
+        viewModel?.spinnerStatus.bind(listener: { status in
+            guard let status = status else { return }
+            switch status {
+                case .start:
+                    self.showSpinner(onView: self.view)
+                case .stop:
+                    self.removeSpinner()
+            }
+        })
+        
+        viewModel?.error.bind(listener: {  error in
+            guard let _ = error else { return }
+            self.showErrorAlert()
+        })
+        
+        viewModel?.postsPeriodFiltersModel.bind(listener: {  model in
+            guard let model = model else { return }
+            
+            self.setupPeriodLabelView()
+            self.setupPeriodFilterView(from: model)
+        })
+        
+        viewModel?.postsTypeFiltersModel.bind(listener: {  model in
+            guard let model = model else { return }
+            
+            self.setupTopicLabelView()
+            self.setupPostTypeFilterView(from: model)
+        })
+        
+        viewModel?.mostSharedFiltersModel.bind(listener: {  model in
+            guard let model = model else { return }
+            
+            self.setupMostSharedLabelView()
+            self.setupMostSharedFiltersView(from: model)
+        })
+        
+        viewModel?.isMostSharedFilterSelected.bind(listener: { isMostSharedFilterSelected in
+            guard let _ = isMostSharedFilterSelected else { return }
+            // I think NYC API it only uses facebook as shared type, so I am not using this feature
+            // self.toggleMostSharedFilters(isMostSharedFilterSelected: isMostSharedFilterSelected)
+        })
     }
 }
 
@@ -71,12 +124,6 @@ extension FilterViewController {
     private func setupView() {
         setupNavigationBar()
         setupScrollView()
-        setupTopicLabelView()
-        setupPostTypeFilterView()
-        setupMostSharedLabelView()
-        setupMostSharedFiltersView()
-        setupPeriodLabelView()
-        setupPeriodFilterView()
     }
     
     private func setupNavigationBar() {
@@ -91,70 +138,67 @@ extension FilterViewController {
         setupScrollViewConstraints()
     }
     
+    private func setupPeriodLabelView() {
+        scrollView.addSubview(periodLabelView)
+        periodLabelView.configureView(with: "Period",
+                                      and: UIFont.systemFont(ofSize: 17, weight: .heavy))
+        
+        setupPeriodLabelViewConstraints()
+    }
+    
+    private func setupPeriodFilterView(from models: [PostFiltersModel]) {
+        scrollView.addSubview(periodFilterView)
+        
+        
+        periodFilterView.configureView(from: models)
+        setupPeriodFilterViewConstraint()
+        periodFilterView.delegate = viewModel
+    }
+    
     private func setupTopicLabelView() {
         scrollView.addSubview(topicLabelView)
         topicLabelView.configureView(with: "Post Type",
-                                and: UIFont.systemFont(ofSize: 17, weight: .heavy))
+                                     and: UIFont.systemFont(ofSize: 17, weight: .heavy))
         
         setupTopicLabelViewConstraints()
     }
     
-    private func setupPostTypeFilterView() {
+    private func setupPostTypeFilterView(from models: [PostFiltersModel]) {
         scrollView.addSubview(postTypeFilterView)
-        let models = [
-            PostFiltersModel(filterName: "Most Mailed", filterTag: 1),
-            PostFiltersModel(filterName: "Most Shared", filterTag: 2),
-            PostFiltersModel(filterName: "Most Viewed", filterTag: 3)
-        ]
+        
         
         postTypeFilterView.configureView(from: models)
+        postTypeFilterView.delegate = viewModel
         setupPostTypeFilterViewConstraint()
     }
     
     private func setupMostSharedLabelView() {
         scrollView.addSubview(mostSharedLabelView)
         mostSharedLabelView.configureView(with: "Most Shared Options",
-                                and: UIFont.systemFont(ofSize: 17, weight: .heavy))
+                                          and: UIFont.systemFont(ofSize: 17, weight: .heavy))
         
         setupMostSharedLabelViewConstraints()
     }
     
-    private func setupMostSharedFiltersView() {
+    private func setupMostSharedFiltersView(from models: [PostFiltersModel]) {
         scrollView.addSubview(mostSharedFiltersView)
-        let models = [
-            PostFiltersModel(filterName: "Facebook", filterTag: 1),
-            PostFiltersModel(filterName: "Twitter", filterTag: 2)
-        ]
-        
         mostSharedFiltersView.configureView(from: models)
+        mostSharedFiltersView.delegate = viewModel
         setupPeriodFiltersViewConstraint()
-    }
-    
-    private func setupPeriodLabelView() {
-        scrollView.addSubview(periodLabelView)
-        periodLabelView.configureView(with: "Period",
-                                and: UIFont.systemFont(ofSize: 17, weight: .heavy))
-        
-        setupPeriodLabelViewConstraints()
-    }
-    
-    private func setupPeriodFilterView() {
-        scrollView.addSubview(periodFilterView)
-        let models = [
-            PostFiltersModel(filterName: "1 día", filterTag: 1),
-            PostFiltersModel(filterName: "7 días", filterTag: 2),
-            PostFiltersModel(filterName: "30 días", filterTag: 3)
-        ]
-        
-        periodFilterView.configureView(from: models)
-        setupPeriodFilterViewConstraint()
     }
 }
 
 // MARK: - User Actions
 extension FilterViewController {
-    @objc func doneButtonTapped() {
+    @objc private func doneButtonTapped() {
         debugPrint("hey hey")
+    }
+    
+    private func toggleMostSharedFilters(isMostSharedFilterSelected: Bool) {
+        DispatchQueue.main.async {
+            self.mostSharedLabelView.isHidden = !isMostSharedFilterSelected
+            self.mostSharedFiltersView.isHidden = !isMostSharedFilterSelected
+        }
     }
 }
 

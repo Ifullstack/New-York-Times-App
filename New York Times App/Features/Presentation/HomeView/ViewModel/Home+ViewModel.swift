@@ -9,76 +9,25 @@ import Foundation
 
 protocol HomeViewModelInput {
     func viewDidLoad()
+    var sharedViewModel: SharedViewModel? { get }
 }
 
-protocol HomeViewModelOutput {
-    var postsModel: Box<[PostsModel]?> { get }
-}
+protocol HomeViewModelOutput {}
 
 protocol HomeViewModel: HomeViewModelInput, HomeViewModelOutput {}
 
 class DefaultHomeViewModel: HomeViewModel {
-    var postsModel: Box<[PostsModel]?> = Box(nil)
+    
+    // Exposed Properties
+    var sharedViewModel: SharedViewModel?
+    
+    init(sharedViewModel: SharedViewModel = DefaultSharedViewModel()) {
+        self.sharedViewModel = sharedViewModel
+    }
     
     func viewDidLoad() {
-        fetchPosts()
+        sharedViewModel?.fetchPosts()
     }
 }
 
-// MARK: - Private Methods
-extension DefaultHomeViewModel {
-    func fetchPosts() {
-        postsModel.value = [
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2")
-        ]
-    }
-}
+
