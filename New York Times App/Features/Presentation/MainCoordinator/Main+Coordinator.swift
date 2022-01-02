@@ -44,5 +44,9 @@ extension MainCoordinator {
         view.viewModel = DefaultFilterViewModel(sharedViewModel: sharedViewModel)
         navigationController.pushViewController(view, animated: true)
     }
+    
+    func popView() {
+        navigationController.popViewController(animated: true)
+    }
 }
 

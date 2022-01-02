@@ -191,7 +191,8 @@ extension FilterViewController {
 // MARK: - User Actions
 extension FilterViewController {
     @objc private func doneButtonTapped() {
-        debugPrint("hey hey")
+        viewModel?.doneButtonTapped()
+        coordinator?.popView()
     }
     
     private func toggleMostSharedFilters(isMostSharedFilterSelected: Bool) {

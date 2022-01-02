@@ -90,6 +90,6 @@ extension PostsView: UITableViewDelegate, UITableViewDataSource {
     
     // TODO: Mejorar este height estático y si no me gusta cambiar a una collection
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(255)
+        return CGFloat(270)
     }
 }

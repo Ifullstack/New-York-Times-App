@@ -45,15 +45,6 @@ class LabelView: UIView {
             labelView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    let label: UILabel = {
-        let title = UILabel()
-        title.numberOfLines = 0
-        title.lineBreakMode = .byWordWrapping
-        title.textAlignment = .left
-        title.translatesAutoresizingMaskIntoConstraints = false
-        
-        return title
-    }()
 }
 
 // MARK: - Configure Method

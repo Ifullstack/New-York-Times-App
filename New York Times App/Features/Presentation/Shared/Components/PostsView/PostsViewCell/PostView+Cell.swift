@@ -29,6 +29,7 @@ class PostViewCell: UITableViewCell {
     
     private(set) var postTitleLabelView: LabelView = {
         let postTitleLabelView = LabelView(frame: .zero)
+       
         postTitleLabelView.translatesAutoresizingMaskIntoConstraints = false
         
         return postTitleLabelView
@@ -93,10 +94,10 @@ extension PostViewCell {
             }
         }
         
-        self.publicationDateLabelView.configureView(with: model.publicationDate, and: UIFont.systemFont(ofSize: 15, weight: .regular))
-        self.postAuthorLabelView.configureView(with: model.autor, and: UIFont.systemFont(ofSize: 13, weight: .regular))
-        self.postTitleLabelView.configureView(with: model.title, and: UIFont.systemFont(ofSize: 22, weight: .heavy))
-        self.postSectionLabelView.configureView(with: model.section, and: UIFont.systemFont(ofSize: 13, weight: .regular))
+        self.publicationDateLabelView.configureView(with: model.publicationDate ?? "", and: UIFont.systemFont(ofSize: 15, weight: .regular))
+        self.postAuthorLabelView.configureView(with: model.autor ?? "", and: UIFont.systemFont(ofSize: 13, weight: .regular))
+        self.postTitleLabelView.configureView(with: model.title ?? "", and: UIFont.systemFont(ofSize: 22, weight: .heavy))
+        self.postSectionLabelView.configureView(with: model.section ?? "", and: UIFont.systemFont(ofSize: 13, weight: .regular))
     }
 }
 
@@ -105,7 +106,7 @@ extension PostViewCell {
     private func setupPublicationDateViewConstraints() {
         NSLayoutConstraint.activate([
             publicationDateLabelView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            publicationDateLabelView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            publicationDateLabelView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
@@ -122,6 +123,7 @@ extension PostViewCell {
         NSLayoutConstraint.activate([
             postAuthorLabelView.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 5),
             postAuthorLabelView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            postAuthorLabelView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
@@ -129,6 +131,7 @@ extension PostViewCell {
         NSLayoutConstraint.activate([
             postTitleLabelView.topAnchor.constraint(equalTo: postAuthorLabelView.bottomAnchor, constant: 0),
             postTitleLabelView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            postTitleLabelView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
@@ -136,6 +139,7 @@ extension PostViewCell {
         NSLayoutConstraint.activate([
             postSectionLabelView.topAnchor.constraint(equalTo: postTitleLabelView.bottomAnchor, constant: 5),
             postSectionLabelView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            postSectionLabelView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }

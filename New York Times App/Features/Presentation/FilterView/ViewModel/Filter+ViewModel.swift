@@ -9,6 +9,7 @@ import Foundation
 
 protocol FilterViewModelInput {
     func viewDidLoad()
+    func doneButtonTapped()
 }
 
 protocol FilterViewModelOutput {
@@ -26,6 +27,7 @@ protocol FilterViewModel: FilterViewModelInput,
                           CheckBoxFiltersCellProtocol {}
 
 class DefaultFilterViewModel: FilterViewModel {
+    
     // Bindings
     var postsPeriodFiltersModel: Box<[PostFiltersModel]?> = Box(nil)
     var postsTypeFiltersModel: Box<[PostFiltersModel]?> = Box(nil)
@@ -33,12 +35,12 @@ class DefaultFilterViewModel: FilterViewModel {
     var spinnerStatus: Box<SpinnerStatus?> = Box(nil)
     var error: Box<Error?> = Box(nil)
     var isMostSharedFilterSelected: Box<Bool?> = Box(nil)
-    
+ 
     // Exposed Properties
     var sharedViewModel: SharedViewModel?
     
-    private var periodSelected: String = ""
-    private var postTypeSelected: String = ""
+    private var periodSelected: String = "1"
+    private var postTypeSelected: String = "viewed"
     private var mostSharedSelected: String = ""
     // I think NYC API it only uses facebook as shared type, so I am not using this feature
     //private var mostSharedSelected: [String] = []
@@ -52,6 +54,16 @@ class DefaultFilterViewModel: FilterViewModel {
         fetchFiltersModel()
     }
     
+    func doneButtonTapped() {
+        sharedViewModel?.fetchPosts(parameters: FetchPostsUseCaseParameters(postType: postTypeSelected,
+                                                                            period: periodSelected,
+                                                                            sharedType: mostSharedSelected))
+    }
+}
+
+// MARK: - Private Methods
+extension DefaultFilterViewModel {
+    // TODO: Pasar los nombres y las values a una enum de constantes
     private func fetchFiltersModel() {
         postsPeriodFiltersModel.value = [
             PostFiltersModel(filterName: "1 día", filterType: .period, filterValue: "1"),
@@ -73,7 +85,7 @@ class DefaultFilterViewModel: FilterViewModel {
     }
 }
 
-//// MARK: - RadioFiltersCellProtocol
+// MARK: - RadioFiltersCellProtocol
 extension DefaultFilterViewModel {
     func radioButtonTapped(model: PostFiltersModel) {
         switch model.filterType {
@@ -81,7 +93,7 @@ extension DefaultFilterViewModel {
                 self.periodSelected = model.filterValue
             case .postType:
                 self.postTypeSelected = model.filterValue
-                self.isMostSharedFilterSelected.value = model.filterName == "Most Shared" ? true : false
+            self.mostSharedSelected  = model.filterName == "Most Shared" ? "facebook" : ""
             case .mostSharedType:
                 self.mostSharedSelected = "facebook"
         }

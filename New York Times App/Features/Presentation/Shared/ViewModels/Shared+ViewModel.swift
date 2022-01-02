@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SharedViewModelInput {
-    func fetchPosts()
+    func fetchPosts(parameters: FetchPostsUseCaseParameters)
 }
 
 protocol SharedViewModelOutput {
@@ -26,64 +26,34 @@ class DefaultSharedViewModel: SharedViewModel {
     var postsModel: Box<[PostsModel]?> = Box(nil)
     var spinnerStatus: Box<SpinnerStatus?> = Box(nil)
     var error: Box<Error?> = Box(nil)
+    
+    // UseCases
+    private let fetchPostsUseCase: FetchPostsUseCase?
+    
+    init(fetchPostsUseCase: FetchPostsUseCase = DefaultFetchPostsUseCase()) {
+        self.fetchPostsUseCase = fetchPostsUseCase
+    }
 }
 
 // MARK: - Public Methods
 extension DefaultSharedViewModel {
-    func fetchPosts() {
+    func fetchPosts(parameters: FetchPostsUseCaseParameters) {
         spinnerStatus.value = .start
-        postsModel.value = [
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title",
-                       autor: "Autor",
-                       section: "Section",
-                       publicationDate: "Publication Date"),
-            PostsModel(image: "https://static01.nyt.com/images/2021/12/26/fashion/00Havrilesky-Excerpt/00Havrilesky-Excerpt-mediumThreeByTwo210.jpg",
-                       title: "Title 2",
-                       autor: "Autor 2",
-                       section: "Section 2",
-                       publicationDate: "Publication Date 2")
-        ]
-        spinnerStatus.value = .stop
+        let completion: (Result<PostsEntity, Error>) -> Void = { result in
+            switch result {
+            case .failure(let error):
+                self.error.value = error
+            case .success(let entity):
+                var models: [PostsModel] = []
+                entity.results?.forEach({ resultsEntity in
+                    models.append(PostsModel(entity: resultsEntity))
+                })
+                
+                self.postsModel.value = models
+            }
+            self.spinnerStatus.value = .stop
+        }
+        
+        fetchPostsUseCase?.execute(params: parameters, completion: completion)
     }
 }
