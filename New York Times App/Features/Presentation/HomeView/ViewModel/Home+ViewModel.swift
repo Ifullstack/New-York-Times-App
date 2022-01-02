@@ -26,9 +26,9 @@ class DefaultHomeViewModel: HomeViewModel {
     }
     
     func viewDidLoad() {
-        sharedViewModel?.fetchPosts(parameters: FetchPostsUseCaseParameters(postType: "viewed",
-                                                                            period: "1",
-                                                                            sharedType: ""))
+        sharedViewModel?.fetchPosts(parameters: FetchPostsUseCaseParameters(postType: sharedViewModel?.postTypeSelected ?? "",
+                                                                            period: sharedViewModel?.periodSelected ?? "",
+                                                                            sharedType: sharedViewModel?.sharedTypeSelected ?? ""))
     }
 }
 

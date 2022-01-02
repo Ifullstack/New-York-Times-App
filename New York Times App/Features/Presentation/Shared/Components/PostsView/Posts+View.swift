@@ -15,6 +15,8 @@ extension PostsView {
 
 class PostsView: UIView {
     
+    var delegate: PostsViewProtocol?
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,12 +47,14 @@ class PostsView: UIView {
     
         tableView.register(PostViewCell.self, forCellReuseIdentifier: Cells.postsCellId)
         tableView.backgroundColor = .clear
+        tableView.sectionIndexBackgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false
         tableView.alwaysBounceHorizontal = false
-
+        tableView.allowsSelection = false
+       
         setupConstraints()
     }
     
@@ -82,7 +86,8 @@ extension PostsView: UITableViewDelegate, UITableViewDataSource {
               let model = postsModel?[indexPath.row] else {
             return UITableViewCell()
         }
-  
+        
+        cell.delegate = delegate
         cell.backgroundColor = .clear
         cell.configureCell(from: model)
         return cell
@@ -90,6 +95,6 @@ extension PostsView: UITableViewDelegate, UITableViewDataSource {
     
     // TODO: Mejorar este height estático y si no me gusta cambiar a una collection
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(270)
+        return CGFloat(280)
     }
 }

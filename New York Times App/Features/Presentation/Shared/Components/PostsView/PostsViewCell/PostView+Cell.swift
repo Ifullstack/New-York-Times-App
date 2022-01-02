@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol PostsViewProtocol {
+    func postTapped(postModelSelected: PostsModel)
+}
+
 class PostViewCell: UITableViewCell {
+    private var model: PostsModel?
+    
+    var delegate: PostsViewProtocol?
     
     private(set) var publicationDateLabelView: LabelView = {
         let publicationDateLabelView = LabelView(frame: .zero)
@@ -74,17 +81,33 @@ extension PostViewCell {
         contentView.addSubview(postTitleLabelView)
         contentView.addSubview(postSectionLabelView)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didSelectView))
+        contentView.addGestureRecognizer(tapGesture)
+        
         setupPublicationDateViewConstraints()
         setupImageViewConstraints()
         setupPostAuthorLabelViewConstraints()
         setupPostTitleLabelViewConstraints()
         setupPostSectionLabelViewConstraints()
     }
+    
+    
+}
+
+// MARK: - User Actions
+extension PostViewCell {
+    @objc func didSelectView() {
+        if let model = model {
+            delegate?.postTapped(postModelSelected: model)
+        }
+    }
 }
 
 // MARK: - Public Methods
 extension PostViewCell {
     func configureCell(from model: PostsModel) {
+        self.model = model
+        
         if let imageName = model.image,
            let imageUrl = URL(string: imageName),
            let data = try? Data(contentsOf: imageUrl),

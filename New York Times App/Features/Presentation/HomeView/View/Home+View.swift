@@ -24,6 +24,11 @@ class HomeViewController: BaseViewController<MainCoordinator> {
         setupView()
         setupBinding()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
 }
 
 // MARK: - Setup Binding
@@ -55,7 +60,6 @@ extension HomeViewController {
 // MARK: - Setup View
 extension HomeViewController {
     private func setupView() {
-        setupNavigationBar()
         view.addSubview(postsView)
         setupConstraints()
     }
@@ -65,24 +69,34 @@ extension HomeViewController {
             let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(self.filterButtonTapped))
             self.navigationItem.rightBarButtonItem = filterButton
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            self.navigationController?.navigationBar.backgroundColor = UIColor.colorCatalog(name: .primaryBackground)
             self.title = "New York Times"
         }
     }
     
     private func setupPostsView(from models: [PostsModel]) {
         DispatchQueue.main.async {
+            self.postsView.delegate = self
             self.postsView.configureView(from: models)
         }
     }
 }
 
 // MARK: - User Actions
-extension HomeViewController {
-    @objc func filterButtonTapped() {
+extension HomeViewController: PostsViewProtocol {
+    @objc private func filterButtonTapped() {
         guard let sharedViewModel = viewModel.sharedViewModel else {
             return
         }
         coordinator?.goToFilterView(sharedViewModel: sharedViewModel)
+    }
+    
+    func postTapped(postModelSelected: PostsModel) {
+        guard let sharedViewModel = viewModel.sharedViewModel else {
+            return
+        }
+        sharedViewModel.setPostModelSelected(postModelSelected: postModelSelected)
+        coordinator?.goToPostDetailView(sharedViewModel: sharedViewModel)
     }
 }
 

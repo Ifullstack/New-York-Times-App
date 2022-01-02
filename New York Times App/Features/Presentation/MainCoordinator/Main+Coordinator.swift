@@ -45,6 +45,14 @@ extension MainCoordinator {
         navigationController.pushViewController(view, animated: true)
     }
     
+    func goToPostDetailView(sharedViewModel: SharedViewModel) {
+        let view = PostDetailViewController()
+        view.coordinator = self
+        view.sharedViewModel = sharedViewModel
+        
+        navigationController.pushViewController(view, animated: true)
+    }
+    
     func popView() {
         navigationController.popViewController(animated: true)
     }
