@@ -34,9 +34,7 @@ extension PostsModel {
        
         entity.forEach { entity in
             if let mediaMetada = entity.mediaMetadata {
-                mediaMetada.forEach { mediaMetadaEntity in
-                    imageUrl = mediaMetadaEntity.url ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png"
-                }
+                imageUrl = mediaMetada[1].url ?? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1200px-No_image_available.svg.png"
             }
         }
         
