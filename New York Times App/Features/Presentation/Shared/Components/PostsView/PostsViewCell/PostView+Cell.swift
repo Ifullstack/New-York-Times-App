@@ -90,8 +90,6 @@ extension PostViewCell {
         setupPostTitleLabelViewConstraints()
         setupPostSectionLabelViewConstraints()
     }
-    
-    
 }
 
 // MARK: - User Actions
@@ -117,10 +115,17 @@ extension PostViewCell {
             }
         }
         
-        self.publicationDateLabelView.configureView(with: model.publicationDate ?? "", and: UIFont.systemFont(ofSize: 15, weight: .regular))
-        self.postAuthorLabelView.configureView(with: model.autor ?? "", and: UIFont.systemFont(ofSize: 13, weight: .regular))
-        self.postTitleLabelView.configureView(with: model.title ?? "", and: UIFont.systemFont(ofSize: 22, weight: .heavy))
-        self.postSectionLabelView.configureView(with: model.section ?? "", and: UIFont.systemFont(ofSize: 13, weight: .regular))
+        self.publicationDateLabelView.configureView(with: model.publicationDate ?? "",
+                                                    and: UIFont.systemFont(ofSize: 15, weight: .regular))
+        
+        self.postAuthorLabelView.configureView(with: model.autor ?? "",
+                                               and: UIFont.systemFont(ofSize: 13, weight: .regular))
+        
+        self.postTitleLabelView.configureView(with: model.title ?? "",
+                                              and: UIFont.systemFont(ofSize: 22, weight: .heavy))
+        
+        self.postSectionLabelView.configureView(with: model.section ?? "",
+                                                and: UIFont.systemFont(ofSize: 13, weight: .regular))
     }
 }
 
