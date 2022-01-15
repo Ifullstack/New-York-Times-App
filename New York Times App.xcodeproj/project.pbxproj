@@ -18,6 +18,9 @@
 		B06A20E32781B9ED00692614 /* FetchPost+Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E22781B9ED00692614 /* FetchPost+Repository.swift */; };
 		B06A20E52781B9FC00692614 /* FetchPostRepository+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E42781B9FC00692614 /* FetchPostRepository+Parameters.swift */; };
 		B06A20E72781BA0800692614 /* Posts+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06A20E62781BA0800692614 /* Posts+Decodable.swift */; };
+		B06DECDD2792F31E00CF4A34 /* FetchPostRepository+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DECDC2792F31E00CF4A34 /* FetchPostRepository+Test.swift */; };
+		B06DECE02792FACF00CF4A34 /* Api+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DECDF2792FACF00CF4A34 /* Api+Service.swift */; };
+		B06DECE42792FC9A00CF4A34 /* ApiService+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DECE32792FC9A00CF4A34 /* ApiService+Mock.swift */; };
 		B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5627805F62003A9B19 /* Filter+View.swift */; };
 		B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5927805FA0003A9B19 /* Coordinator.swift */; };
 		B08CCA5C27805FC7003A9B19 /* Main+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5B27805FC7003A9B19 /* Main+Coordinator.swift */; };
@@ -76,6 +79,9 @@
 		B06A20E22781B9ED00692614 /* FetchPost+Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPost+Repository.swift"; sourceTree = "<group>"; };
 		B06A20E42781B9FC00692614 /* FetchPostRepository+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPostRepository+Parameters.swift"; sourceTree = "<group>"; };
 		B06A20E62781BA0800692614 /* Posts+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+Decodable.swift"; sourceTree = "<group>"; };
+		B06DECDC2792F31E00CF4A34 /* FetchPostRepository+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPostRepository+Test.swift"; sourceTree = "<group>"; };
+		B06DECDF2792FACF00CF4A34 /* Api+Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Api+Service.swift"; sourceTree = "<group>"; };
+		B06DECE32792FC9A00CF4A34 /* ApiService+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiService+Mock.swift"; sourceTree = "<group>"; };
 		B08CCA5627805F62003A9B19 /* Filter+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filter+View.swift"; sourceTree = "<group>"; };
 		B08CCA5927805FA0003A9B19 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B08CCA5B27805FC7003A9B19 /* Main+Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Main+Coordinator.swift"; sourceTree = "<group>"; };
@@ -198,6 +204,54 @@
 				B06A20E42781B9FC00692614 /* FetchPostRepository+Parameters.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		B06DECD92792F2AA00CF4A34 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				B06DECDA2792F2FA00CF4A34 /* Data */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		B06DECDA2792F2FA00CF4A34 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B06DECDB2792F30300CF4A34 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B06DECDB2792F30300CF4A34 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B06DECDC2792F31E00CF4A34 /* FetchPostRepository+Test.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		B06DECDE2792FAB600CF4A34 /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				B06DECDF2792FACF00CF4A34 /* Api+Service.swift */,
+			);
+			path = ApiService;
+			sourceTree = "<group>";
+		};
+		B06DECE12792FC7900CF4A34 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B06DECE22792FC8000CF4A34 /* ApiService */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B06DECE22792FC8000CF4A34 /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				B06DECE32792FC9A00CF4A34 /* ApiService+Mock.swift */,
+			);
+			path = ApiService;
 			sourceTree = "<group>";
 		};
 		B08CCA5327805F20003A9B19 /* View */ = {
@@ -421,6 +475,8 @@
 		B0F1B007277B7A04009AA9BE /* New York Times AppTests */ = {
 			isa = PBXGroup;
 			children = (
+				B06DECE12792FC7900CF4A34 /* Mocks */,
+				B06DECD92792F2AA00CF4A34 /* Features */,
 				B0F1B008277B7A04009AA9BE /* New_York_Times_AppTests.swift */,
 			);
 			path = "New York Times AppTests";
@@ -440,6 +496,7 @@
 			children = (
 				B0F1AFFC277B7A03009AA9BE /* LaunchScreen.storyboard */,
 				B0F1AFF7277B7A03009AA9BE /* Main.storyboard */,
+				B06DECDE2792FAB600CF4A34 /* ApiService */,
 				B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */,
 				B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */,
 				B08CCA5927805FA0003A9B19 /* Coordinator.swift */,
@@ -636,6 +693,7 @@
 				B08CCA8C2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift in Sources */,
 				B06A20E12781B9D500692614 /* Posts+Entity.swift in Sources */,
 				B06A20E32781B9ED00692614 /* FetchPost+Repository.swift in Sources */,
+				B06DECE02792FACF00CF4A34 /* Api+Service.swift in Sources */,
 				B06A20DF2781B9C600692614 /* Domain+Interfaces.swift in Sources */,
 				B02791D32780EA0400E27315 /* Filter+ViewModel.swift in Sources */,
 				B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */,
@@ -672,7 +730,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B06DECDD2792F31E00CF4A34 /* FetchPostRepository+Test.swift in Sources */,
 				B0F1B009277B7A04009AA9BE /* New_York_Times_AppTests.swift in Sources */,
+				B06DECE42792FC9A00CF4A34 /* ApiService+Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
