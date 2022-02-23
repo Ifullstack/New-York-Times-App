@@ -10,14 +10,27 @@ import XCTest
 
 class FetchPostRepositoryTest: XCTestCase {
 
+    // GIVEN
+    var sut: FetchPostsRepository?
+    var sutMock: FetchPostsRepository?
+    
+    override func setUp() {
+        super.setUp()
+        sut = DefaultFetchPostsRepository()
+        sutMock = DefaultFetchPostsRepository(apiService: MockFailureApiService())
+    }
+    
+    override func tearDown() {
+        sut = nil
+        sutMock = nil
+        super.tearDown()
+    }
+    
     func testFetchPosts_whenIsPostTypeEmailedAndResultSuccess() {
-        // GIVEN
-        let sut: FetchPostsRepository = DefaultFetchPostsRepository()
-        
-        // WHEN
         let expt = self.expectation(description: "I expect a success result and inflate decodable data")
         
-        sut.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "emailed",
+        // WHEN
+        sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "emailed",
                                                                    period: "7",
                                                                    sharedType: "")) { result in
             
@@ -37,13 +50,10 @@ class FetchPostRepositoryTest: XCTestCase {
     }
     
     func testFetchPosts_whenIsPostTypeSharedAndResultSuccess() {
-        // GIVEN
-        let sut: FetchPostsRepository = DefaultFetchPostsRepository()
-        
-        // WHEN
         let expt = self.expectation(description: "I expect a success result and inflate decodable data")
         
-        sut.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
+        // WHEN
+        sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
                                                                    period: "7",
                                                                    sharedType: "facebook")) { result in
             
@@ -62,14 +72,34 @@ class FetchPostRepositoryTest: XCTestCase {
         wait(for: [expt], timeout: 10.0)
     }
     
-    func testFetchPosts_whenIsPostTypeSharedAndResultFailureForInvalidUrl() {
-        // GIVEN
-        let sut: FetchPostsRepository = DefaultFetchPostsRepository(apiService: MockFailureApiService())
-        
-        // WHEN
+    func testFetchPosts_whenIsPostTypeSharedAndResultFailure() {
         let expt = self.expectation(description: "I expect a failure error")
         
-        sut.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "sharedssss",
+        // WHEN
+        sutMock?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
+                                                                   period: "7",
+                                                                   sharedType: "facebook")) { result in
+            
+            switch result {
+                case .success(let decodable):
+                    // THEN
+                    XCTAssertNil(decodable)
+                case .failure(let error):
+                    // THEN
+                    XCTAssertNotNil(error)
+            }
+            
+            expt.fulfill()
+        }
+        
+        wait(for: [expt], timeout: 10.0)
+    }
+    
+    func testFetchPosts_whenIsPostTypeSharedAndResultFailureForInvalidUrl() {
+        let expt = self.expectation(description: "I expect a failure error")
+        
+        // WHEN
+        sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "sharedssss",
                                                                    period: "7",
                                                                    sharedType: "facebook")) { result in
             
