@@ -17,7 +17,8 @@ extension DefaultFetchPostsRepository {
 }
 
 class DefaultFetchPostsRepository: FetchPostsRepository {
-
+    
+    // Dependencies
     private let apiService: ApiService?
     
     init(apiService: ApiService = DefaultApiService()) {
