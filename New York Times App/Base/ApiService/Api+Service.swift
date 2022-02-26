@@ -8,29 +8,16 @@
 import Foundation
 
 protocol ApiService {
-    func getDataFromGetRequest(with url: String,
-                               and completion: @escaping (Result<Data, Error>) -> Void)
+    func getDataFromGetRequest(with url: String) async throws -> Data
 }
 
 class DefaultApiService: ApiService {
-    func getDataFromGetRequest(with url: String,
-                               and completion: @escaping (Result<Data, Error>) -> Void) {
-        
+    func getDataFromGetRequest(with url: String) async throws -> Data {
         guard let url = URL(string: url) else {
-            completion(.failure(AppError.invalidUrl))
-            return
+            throw AppError.invalidUrl
         }
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                completion(.failure(AppError.serviceError(error: error)))
-                return
-            }
-            guard let data = data else {
-                completion(.failure(AppError.missingData))
-                return
-            }
-            completion(.success(data))
-        }.resume()
+        let (data,_) = try await URLSession.shared.data(from: url)
+        return data
     }
 }
