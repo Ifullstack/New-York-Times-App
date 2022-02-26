@@ -25,25 +25,22 @@ class DefaultFetchPostsRepository: FetchPostsRepository {
         self.apiService = apiService
     }
     
-    func fetchPosts(parameters: FetchPostsRespositoryParameters,
-                    completion: @escaping (Result<PostsDecodable, Error>) -> Void) {
-        
+    func fetchPosts(parameters: FetchPostsRespositoryParameters) async throws -> PostsDecodable {
         let sharedType: String = parameters.sharedType.isEmpty ? "" :  "/\(parameters.sharedType)"
         let urlCreated: String = Endpoints.baseUrl + parameters.postType + "/" + parameters.period + sharedType + Endpoints.dotJson + Endpoints.apiKey
         
-        apiService?.getDataFromGetRequest(with: urlCreated,
-                                          and: { result in
-            switch result {
-                case .success(let data):
-                    do {
-                        let decodable = try JSONDecoder().decode(PostsDecodable.self, from: data)
-                        completion(.success(decodable))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
+        let task = Task { () -> PostsDecodable in
+            do {
+                guard let data = try await apiService?.getDataFromGetRequest(with: urlCreated) else {
+                    throw AppError.unExpectedError
+                }
+                let decodable = try JSONDecoder().decode(PostsDecodable.self, from: data)
+                return decodable
+            } catch {
+                throw error
             }
-        })
+        }
+        
+        return try await task.value
     }
 }

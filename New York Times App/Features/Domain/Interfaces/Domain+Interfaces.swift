@@ -7,6 +7,10 @@
 
 import Foundation
 
+//protocol FetchPostsRepository {
+//    func fetchPosts(parameters: FetchPostsRespositoryParameters, completion: @escaping(Result<PostsDecodable, Error>) -> Void)
+//}
+
 protocol FetchPostsRepository {
-    func fetchPosts(parameters: FetchPostsRespositoryParameters, completion: @escaping(Result<PostsDecodable, Error>) -> Void)
+    func fetchPosts(parameters: FetchPostsRespositoryParameters) async throws -> PostsDecodable
 }
