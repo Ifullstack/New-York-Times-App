@@ -8,8 +8,7 @@
 import Foundation
 
 protocol FetchPostsUseCase {
-    func execute(params: FetchPostsUseCaseParameters,
-                 completion: @escaping(Result<PostsEntity, Error>) -> Void)
+    func execute(params: FetchPostsUseCaseParameters) async throws -> PostsEntity
 }
 
 class DefaultFetchPostsUseCase: FetchPostsUseCase {
@@ -21,26 +20,22 @@ class DefaultFetchPostsUseCase: FetchPostsUseCase {
         self.fetchPostRepository = fetchPostRepository
     }
     
-    func execute(params: FetchPostsUseCaseParameters,
-                 completion: @escaping (Result<PostsEntity, Error>) -> Void) {
-        
+    func execute(params: FetchPostsUseCaseParameters) async throws -> PostsEntity {
         let parameters: FetchPostsRespositoryParameters = FetchPostsRespositoryParameters(postType: params.postType,
                                                                                           period: params.period,
                                                                                           sharedType: params.sharedType)
-    
-        let completion: (Result<PostsDecodable, Error>) -> Void = { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let decodable):
-                guard let _ = decodable.results else {
-                    completion(.failure(AppError.unExpectedError))
-                    return
-                }
-                completion(.success(PostsEntity(decodable: decodable)))
+        let task = Task { () -> PostsEntity in
+            do {
+                guard let decodable = try await fetchPostRepository?.fetchPosts(parameters: parameters),
+                      let _ = decodable.results else {
+                         throw AppError.unExpectedError
+                      }
+                return PostsEntity(decodable: decodable)
+            } catch {
+                throw error
             }
         }
         
-        fetchPostRepository?.fetchPosts(parameters: parameters, completion: completion)
+        return try await task.value
     }
 }
