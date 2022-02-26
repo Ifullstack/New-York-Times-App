@@ -51,23 +51,22 @@ extension DefaultSharedViewModel {
     func fetchPosts(parameters: FetchPostsUseCaseParameters) {
         spinnerStatus.value = .start
         
-        let completion: (Result<PostsEntity, Error>) -> Void = { result in
-            switch result {
-                case .failure(let error):
-                    self.error.value = error
-                case .success(let entity):
-                    guard let results = entity.results else {
-                        self.error.value = AppError.unExpectedError
-                        return
-                    }
-                    self.postsModel.value = results.map { entity -> PostsModel in
-                        return PostsModel(entity: entity)
-                    }
+        Task {
+            do {
+                guard let entity = try await fetchPostsUseCase?.execute(params: parameters),
+                      let results = entity.results else {
+                    self.error.value = AppError.unExpectedError
+                    return
+                }
+                self.postsModel.value = results.map { entity -> PostsModel in
+                    return PostsModel(entity: entity)
+                }
+                self.spinnerStatus.value = .stop
+            } catch {
+                self.error.value = error
+                self.spinnerStatus.value = .stop
             }
-            self.spinnerStatus.value = .stop
         }
-        
-        fetchPostsUseCase?.execute(params: parameters, completion: completion)
     }
     
     func setPostModelSelected(postModelSelected: PostsModel) {
