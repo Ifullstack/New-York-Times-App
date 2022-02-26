@@ -13,9 +13,9 @@ protocol CheckBoxFiltersCellProtocol {
 
 class CheckBoxFiltersCell: UITableViewCell {
    
-    private var model: PostFiltersModel?
-    
     var delegate: CheckBoxFiltersCellProtocol?
+    
+    private var model: PostFiltersModel?
     
     private var containerView: UIView = {
         let containerView = UIView(frame: .zero)
@@ -71,7 +71,7 @@ extension CheckBoxFiltersCell {
         self.model = model
         DispatchQueue.main.async {
             self.labelView.configureView(with: model.filterName,
-                                    and: UIFont.systemFont(ofSize: 16, weight: .semibold))
+                                         and: UIFont.systemFont(ofSize: 16, weight: .semibold))
             
         }
     }

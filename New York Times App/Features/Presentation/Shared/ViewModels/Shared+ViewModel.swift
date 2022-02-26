@@ -41,7 +41,6 @@ class DefaultSharedViewModel: SharedViewModel {
     var sharedTypeSelected: String = ""
     var postModelSelected: PostsModel?
     
-        
     init(fetchPostsUseCase: FetchPostsUseCase = DefaultFetchPostsUseCase()) {
         self.fetchPostsUseCase = fetchPostsUseCase
     }
@@ -54,14 +53,16 @@ extension DefaultSharedViewModel {
         
         let completion: (Result<PostsEntity, Error>) -> Void = { result in
             switch result {
-            case .failure(let error):
-                self.error.value = error
-            case .success(let entity):
-                var models: [PostsModel] = []
-                entity.results?.forEach({ resultsEntity in
-                    models.append(PostsModel(entity: resultsEntity))
-                })
-                self.postsModel.value = models
+                case .failure(let error):
+                    self.error.value = error
+                case .success(let entity):
+                    guard let results = entity.results else {
+                        self.error.value = AppError.unExpectedError
+                        return
+                    }
+                    self.postsModel.value = results.map { entity -> PostsModel in
+                        return PostsModel(entity: entity)
+                    }
             }
             self.spinnerStatus.value = .stop
         }

@@ -80,7 +80,6 @@ class DefaultFilterViewModel: FilterViewModel {
 
 // MARK: - Private Methods
 extension DefaultFilterViewModel {
-  
     private func fetchFiltersModel() {
         guard let sharedViewModel = sharedViewModel else { return }
         
@@ -150,8 +149,8 @@ extension DefaultFilterViewModel {
 
 // MARK: - CheckBoxFiltersCellProtocol
 extension DefaultFilterViewModel {
+    // I think NYC API it only uses facebook as shared type, so I am not using this feature
     func checkBoxSelected(model: PostFiltersModel, isSelected: Bool) {
-        // I think NYC API it only uses facebook as shared type, so I am not using this feature
         if case .mostSharedType = model.filterType {
             if isSelected {
                 // Add filter in array

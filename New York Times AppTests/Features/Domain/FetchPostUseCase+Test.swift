@@ -9,6 +9,7 @@ import XCTest
 @testable import New_York_Times_App
 
 class FetchPostRepositoryUseCaseTest: XCTestCase {
+    
     // Given
     var sut: FetchPostsUseCase?
     var sutMockFailure: FetchPostsUseCase?
