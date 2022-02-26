@@ -143,7 +143,7 @@ extension PostViewCell {
             postImageView.topAnchor.constraint(equalTo: publicationDateLabelView.bottomAnchor, constant: 10),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            postImageView.heightAnchor.constraint(equalToConstant: CGFloat(140))
+            postImageView.heightAnchor.constraint(equalToConstant: CGFloat(160))
         ])
     }
     
