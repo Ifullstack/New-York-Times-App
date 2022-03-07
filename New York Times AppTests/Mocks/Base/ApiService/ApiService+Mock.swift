@@ -10,10 +10,7 @@ import Foundation
 
 
 class MockFailureApiService: ApiService {
-    
-    func getDataFromGetRequest(with url: String,
-                               and completion: @escaping (Result<Data, Error>) -> Void) {
-        
-        completion(.failure(AppError.missingData as Error))
+    func getDataFromGetRequest(with url: String) async throws -> Data {
+        throw AppError.missingData
     }
 }
