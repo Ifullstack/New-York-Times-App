@@ -9,22 +9,19 @@ import Foundation
 @testable import New_York_Times_App
 
 class FetchPostsRepositoryFailureMock: FetchPostsRepository {
-    func fetchPosts(parameters: FetchPostsRespositoryParameters,
-                    completion: @escaping (Result<PostsDecodable, Error>) -> Void) {
-        
-        completion(.failure(AppError.unExpectedError))
+    func fetchPosts(parameters: FetchPostsRespositoryParameters) async throws -> PostsDecodable {
+        throw AppError.unExpectedError
     }
 }
 
 class FetchPostsRepositoryMockEmptyResult: FetchPostsRepository {
-    func fetchPosts(parameters: FetchPostsRespositoryParameters,
-                    completion: @escaping (Result<PostsDecodable, Error>) -> Void) {
+    func fetchPosts(parameters: FetchPostsRespositoryParameters) async throws -> PostsDecodable {
         do {
             let json = PostsMock.makePostsEmptyResultJsonMock()
             let decodable = try JSONDecoder().decode(PostsDecodable.self, from: json)
-            completion(.success(decodable))
+            return decodable
         } catch {
-            completion(.failure(AppError.unExpectedError))
+            throw error
         }
     }
 }

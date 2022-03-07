@@ -32,22 +32,25 @@ class FetchPostRepositoryUseCaseTest: XCTestCase {
         let expt = self.expectation(description: "I expect a success result and inflate Entity data")
         
         // WHEN
-        sut?.execute(params: FetchPostsUseCaseParameters(postType: "emailed",
-                                                         period: "7",
-                                                         sharedType: ""),
-                     completion: { result in
-            switch result {
-                case .success(let entity):
-                    // THEN
-                    XCTAssertNotNil(entity)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNil(error)
+        Task {
+            do {
+                guard let entity = try await sut?.execute(params: FetchPostsUseCaseParameters(postType: "emailed",
+                                                                                              period: "7",
+                                                                                              sharedType: "")),
+                      let results = entity.results else {
+                    return
+                }
+                // THEN
+                XCTAssertNotNil(entity)
+                XCTAssertNotNil(results)
+                
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
-        })
-        
+        }
         wait(for: [expt], timeout: 10.0)
     }
     
@@ -55,21 +58,26 @@ class FetchPostRepositoryUseCaseTest: XCTestCase {
         let expt = self.expectation(description: "I expect a success result and inflate Entity data")
         
         // WHEN
-        sut?.execute(params: FetchPostsUseCaseParameters(postType: "shared",
-                                                         period: "7",
-                                                         sharedType: "facebook"),
-                     completion: { result in
-            switch result {
-                case .success(let entity):
-                    // THEN
-                    XCTAssertNotNil(entity)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNil(error)
+        Task {
+            do {
+                // WHEN
+                guard let entity = try await sut?.execute(params: FetchPostsUseCaseParameters(postType: "shared",
+                                                                                              period: "7",
+                                                                                              sharedType: "facebook")),
+                      let results = entity.results else {
+                    return
+                }
+                // THEN
+                XCTAssertNotNil(entity)
+                XCTAssertNotNil(results)
+                
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
-        })
+        }
         
         wait(for: [expt], timeout: 10.0)
     }
@@ -77,23 +85,27 @@ class FetchPostRepositoryUseCaseTest: XCTestCase {
     func testFetchPosts_whenIsPostTypeSharedAndResultFailure() {
         let expt = self.expectation(description: "I expect a failure error")
         
-        // WHEN
-        sutMockFailure?.execute(params: FetchPostsUseCaseParameters(postType: "shared",
-                                                         period: "7",
-                                                         sharedType: "facebook"),
-                     completion: { result in
-            switch result {
-                case .success(let decodable):
-                    // THEN
-                    XCTAssertNil(decodable)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNotNil(error)
+        Task {
+            do {
+                // WHEN
+                guard let entity = try await sutMockFailure?.execute(params: FetchPostsUseCaseParameters(postType: "shared",
+                                                                                              period: "7",
+                                                                                              sharedType: "facebook")),
+                      let results = entity.results else {
+                    return
+                }
+                // THEN
+                XCTAssertNil(entity)
+                XCTAssertNil(results)
+                
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNotNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
-        })
-        
+        }
+
         wait(for: [expt], timeout: 10.0)
     }
     
@@ -101,22 +113,27 @@ class FetchPostRepositoryUseCaseTest: XCTestCase {
         let expt = self.expectation(description: "I expect a failure error")
         
         // WHEN
-        sut?.execute(params: FetchPostsUseCaseParameters(postType: "sharedsssss",
-                                                         period: "7",
-                                                         sharedType: "facebook"),
-                     completion: { result in
-            switch result {
-                case .success(let entity):
-                    // THEN
-                    XCTAssertNil(entity)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNotNil(error)
+        Task {
+            do {
+                // WHEN
+                guard let entity = try await sut?.execute(params: FetchPostsUseCaseParameters(postType: "sharedsssss",
+                                                                                              period: "7",
+                                                                                              sharedType: "facebook")),
+                      let results = entity.results else {
+                    return
+                }
+                // THEN
+                XCTAssertNil(entity)
+                XCTAssertNil(results)
+                
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNotNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
-        })
-        
+        }
+
         wait(for: [expt], timeout: 10.0)
     }
     
@@ -124,22 +141,24 @@ class FetchPostRepositoryUseCaseTest: XCTestCase {
         let expt = self.expectation(description: "I expect a failure error")
         
         // WHEN
-        sutMockEmptyResult?.execute(params: FetchPostsUseCaseParameters(postType: "shared",
-                                                         period: "7",
-                                                         sharedType: "facebook"),
-                     completion: { result in
-            switch result {
-                case .success(let entity):
-                    // THEN
-                    XCTAssertNil(entity)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNotNil(error)
+        Task {
+            do {
+                // WHEN
+                guard let entity = try await sutMockEmptyResult?.execute(params: FetchPostsUseCaseParameters(postType: "shared",
+                                                                                              period: "7",
+                                                                                              sharedType: "facebook")) else {
+                    return
+                }
+                // THEN
+                XCTAssertNil(entity)
+                
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNotNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
-        })
-        
+        }
         wait(for: [expt], timeout: 10.0)
     }
 }
