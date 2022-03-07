@@ -6,31 +6,38 @@
 //
 
 import Foundation
+import Combine
 
 protocol SharedViewModelInput {
+    // Methods
     func fetchPosts(parameters: FetchPostsUseCaseParameters)
     func setPostModelSelected(postModelSelected: PostsModel)
     
+    // Properties
     var periodSelected: String { get set }
     var postTypeSelected: String { get set }
     var sharedTypeSelected: String { get set }
     var postModelSelected: PostsModel? { get }
+    
+    // Bindings
+    var postsModelPublisher: Published<[PostsModel]?>.Publisher { get }
+    var spinnerStatusPublisher: Published<SpinnerStatus?>.Publisher { get }
+    var errorPublisher: Published<Error?>.Publisher { get }
 }
 
-protocol SharedViewModelOutput {
-    var postsModel: Box<[PostsModel]?> { get }
-    var spinnerStatus: Box<SpinnerStatus?> { get }
-    var error: Box<Error?> { get }
-}
-
-protocol SharedViewModel: SharedViewModelInput,
-                          SharedViewModelOutput {}
+protocol SharedViewModel: SharedViewModelInput {}
 
 class DefaultSharedViewModel: SharedViewModel {
+    
     // Bindings
-    var postsModel: Box<[PostsModel]?> = Box(nil)
-    var spinnerStatus: Box<SpinnerStatus?> = Box(nil)
-    var error: Box<Error?> = Box(nil)
+    @Published var postsModel: [PostsModel]?
+    @Published var spinnerStatus: SpinnerStatus?
+    @Published var error: Error?
+    
+    // Publishers
+    var postsModelPublisher: Published<[PostsModel]?>.Publisher { $postsModel }
+    var spinnerStatusPublisher: Published<SpinnerStatus?>.Publisher { $spinnerStatus }
+    var errorPublisher: Published<Error?>.Publisher { $error }
     
     // UseCases
     private let fetchPostsUseCase: FetchPostsUseCase?
@@ -49,22 +56,22 @@ class DefaultSharedViewModel: SharedViewModel {
 // MARK: - Public Methods
 extension DefaultSharedViewModel {
     func fetchPosts(parameters: FetchPostsUseCaseParameters) {
-        spinnerStatus.value = .start
+        spinnerStatus = .start
         
         Task {
             do {
                 guard let entity = try await fetchPostsUseCase?.execute(params: parameters),
                       let results = entity.results else {
-                    self.error.value = AppError.unExpectedError
+                    self.error = AppError.unExpectedError
                     return
                 }
-                self.postsModel.value = results.map { entity -> PostsModel in
+                self.postsModel = results.map { entity -> PostsModel in
                     return PostsModel(entity: entity)
                 }
-                self.spinnerStatus.value = .stop
+                self.spinnerStatus = .stop
             } catch {
-                self.error.value = error
-                self.spinnerStatus.value = .stop
+                self.error = error
+                self.spinnerStatus = .stop
             }
         }
     }

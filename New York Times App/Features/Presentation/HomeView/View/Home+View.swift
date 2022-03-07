@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class HomeViewController: BaseViewController<MainCoordinator> {
     
     private let viewModel: HomeViewModel = DefaultHomeViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     private var postsView: PostsView = {
         let postsView = PostsView(frame: .zero)
@@ -34,26 +36,33 @@ class HomeViewController: BaseViewController<MainCoordinator> {
 // MARK: - Setup Binding
 extension HomeViewController {
     private func setupBinding() {
-        viewModel.sharedViewModel?.postsModel.bind(listener: {  model in
-            guard let model = model else { return }
-            
-            self.setupPostsView(from: model)
-        })
         
-        viewModel.sharedViewModel?.spinnerStatus.bind(listener: { status in
-            guard let status = status else { return }
-            switch status {
-                case .start:
-                    self.showSpinner(onView: self.view)
-                case .stop:
-                    self.removeSpinner()
-            }
-        })
+        viewModel.sharedViewModel?.postsModelPublisher
+                                  .receive(on: RunLoop.main)
+                                  .sink(receiveValue: { model in
+                                        guard let model = model else { return }
+                                        self.setupPostsView(from: model)
+                                  }).store(in: &cancellables)
         
-        viewModel.sharedViewModel?.error.bind(listener: {  error in
-            guard let _ = error else { return }
-            self.showErrorAlert()
-        })
+        viewModel.sharedViewModel?.spinnerStatusPublisher
+                                  .receive(on: RunLoop.main)
+                                  .sink(receiveValue: { status in
+                                      guard let status = status else { return }
+                                      switch status {
+                                          case .start:
+                                              self.showSpinner(onView: self.view)
+                                          case .stop:
+                                              self.removeSpinner()
+                                      }
+                                  }).store(in: &cancellables)
+        
+
+        viewModel.sharedViewModel?.errorPublisher
+                                  .receive(on: RunLoop.main)
+                                  .sink(receiveValue: { error in
+                                      guard let _ = error else { return }
+                                      self.showErrorAlert()
+                                  }).store(in: &cancellables)
     }
 }
 
