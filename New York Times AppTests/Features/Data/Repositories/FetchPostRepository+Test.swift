@@ -30,20 +30,21 @@ class FetchPostRepositoryTest: XCTestCase {
         let expt = self.expectation(description: "I expect a success result and inflate decodable data")
         
         // WHEN
-        sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "emailed",
-                                                                   period: "7",
-                                                                   sharedType: "")) { result in
-            
-            switch result {
-                case .success(let decodable):
-                    // THEN
-                    XCTAssertNotNil(decodable)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNil(error)
+        Task {
+            do {
+                guard let decodable = try await sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "emailed",
+                                                                                                     period: "7",
+                                                                                                     sharedType: "")) else {
+                    return
+                }
+                // THEN
+                XCTAssertNotNil(decodable)
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
         }
         
         wait(for: [expt], timeout: 10.0)
@@ -53,20 +54,21 @@ class FetchPostRepositoryTest: XCTestCase {
         let expt = self.expectation(description: "I expect a success result and inflate decodable data")
         
         // WHEN
-        sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
-                                                                   period: "7",
-                                                                   sharedType: "facebook")) { result in
-            
-            switch result {
-                case .success(let decodable):
-                    // THEN
-                    XCTAssertNotNil(decodable)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNil(error)
+        Task {
+            do {
+                guard let decodable = try await sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
+                                                                                                     period: "7",
+                                                                                                     sharedType: "facebook")) else {
+                    return
+                }
+                // THEN
+                XCTAssertNotNil(decodable)
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
         }
         
         wait(for: [expt], timeout: 10.0)
@@ -76,43 +78,45 @@ class FetchPostRepositoryTest: XCTestCase {
         let expt = self.expectation(description: "I expect a failure error")
         
         // WHEN
-        sutMock?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
-                                                                   period: "7",
-                                                                   sharedType: "facebook")) { result in
-            
-            switch result {
-                case .success(let decodable):
-                    // THEN
-                    XCTAssertNil(decodable)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNotNil(error)
+        Task {
+            do {
+                guard let decodable = try await sutMock?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "shared",
+                                                                                                     period: "7",
+                                                                                                     sharedType: "facebook")) else {
+                    return
+                }
+                // THEN
+                XCTAssertNil(decodable)
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNotNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
         }
         
         wait(for: [expt], timeout: 10.0)
     }
     
     func testFetchPosts_whenIsPostTypeSharedAndResultFailureForInvalidUrl() {
-        let expt = self.expectation(description: "I expect a failure error")
+        let expt = self.expectation(description: "I expect a failure error for invalid url")
         
         // WHEN
-        sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "sharedssss",
-                                                                   period: "7",
-                                                                   sharedType: "facebook")) { result in
-            
-            switch result {
-                case .success(let decodable):
-                    // THEN
-                    XCTAssertNil(decodable)
-                case .failure(let error):
-                    // THEN
-                    XCTAssertNotNil(error)
+        Task {
+            do {
+                guard let decodable = try await sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "sharedssss",
+                                                                                                     period: "7",
+                                                                                                     sharedType: "facebook")) else {
+                    return
+                }
+                // THEN
+                XCTAssertNil(decodable)
+                expt.fulfill()
+            } catch {
+                // THEN
+                XCTAssertNotNil(error)
+                expt.fulfill()
             }
-            
-            expt.fulfill()
         }
         
         wait(for: [expt], timeout: 10.0)
