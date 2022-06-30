@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: BaseViewController<MainCoordinator> {
     
-    private let viewModel: HomeViewModel = DefaultHomeViewModel()
+    var viewModel: HomeViewModel?
     
     private var postsView: PostsView = {
         let postsView = PostsView(frame: .zero)
@@ -20,7 +20,7 @@ class HomeViewController: BaseViewController<MainCoordinator> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
+        viewModel?.viewDidLoad()
         setupView()
         setupBinding()
     }
@@ -34,13 +34,13 @@ class HomeViewController: BaseViewController<MainCoordinator> {
 // MARK: - Setup Binding
 extension HomeViewController {
     private func setupBinding() {
-        viewModel.sharedViewModel?.postsModel.bind(listener: {  model in
+        viewModel?.sharedViewModel?.postsModel.bind(listener: {  model in
             guard let model = model else { return }
             
             self.setupPostsView(from: model)
         })
         
-        viewModel.sharedViewModel?.spinnerStatus.bind(listener: { status in
+        viewModel?.sharedViewModel?.spinnerStatus.bind(listener: { status in
             guard let status = status else { return }
             switch status {
                 case .start:
@@ -50,7 +50,7 @@ extension HomeViewController {
             }
         })
         
-        viewModel.sharedViewModel?.error.bind(listener: {  error in
+        viewModel?.sharedViewModel?.error.bind(listener: {  error in
             guard let _ = error else { return }
             self.showErrorAlert()
         })
@@ -85,14 +85,14 @@ extension HomeViewController {
 // MARK: - User Actions
 extension HomeViewController: PostsViewProtocol {
     @objc private func filterButtonTapped() {
-        guard let sharedViewModel = viewModel.sharedViewModel else {
+        guard let sharedViewModel = viewModel?.sharedViewModel else {
             return
         }
         coordinator?.goToFilterView(sharedViewModel: sharedViewModel)
     }
     
     func postTapped(postModelSelected: PostsModel) {
-        guard let sharedViewModel = viewModel.sharedViewModel else {
+        guard let sharedViewModel = viewModel?.sharedViewModel else {
             return
         }
         sharedViewModel.setPostModelSelected(postModelSelected: postModelSelected)

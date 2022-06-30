@@ -36,15 +36,6 @@ class LabelView: UIView {
         addSubview(labelView)
         setupConstraints()
     }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            labelView.topAnchor.constraint(equalTo: topAnchor),
-            labelView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            labelView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            labelView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
 }
 
 // MARK: - Configure Method
@@ -52,5 +43,17 @@ extension LabelView {
     func configureView(with text: String, and font: UIFont) {
         labelView.text = text
         labelView.font = font
+    }
+}
+
+// MARK: - Constraints
+extension LabelView {
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            labelView.topAnchor.constraint(equalTo: topAnchor),
+            labelView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            labelView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            labelView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
 }
