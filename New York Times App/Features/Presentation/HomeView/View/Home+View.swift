@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: BaseViewController<MainCoordinator> {
     
     var viewModel: HomeViewModel?
+    
+    private var disposeBag: DisposeBag = DisposeBag()
     
     private var postsView: PostsView = {
         let postsView = PostsView(frame: .zero)
@@ -20,9 +23,9 @@ class HomeViewController: BaseViewController<MainCoordinator> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.viewDidLoad()
         setupView()
         setupBinding()
+        viewModel?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,26 +37,39 @@ class HomeViewController: BaseViewController<MainCoordinator> {
 // MARK: - Setup Binding
 extension HomeViewController {
     private func setupBinding() {
-        viewModel?.sharedViewModel?.postsModel.bind(listener: {  model in
-            guard let model = model else { return }
-            
-            self.setupPostsView(from: model)
-        })
-        
-        viewModel?.sharedViewModel?.spinnerStatus.bind(listener: { status in
-            guard let status = status else { return }
-            switch status {
-                case .start:
-                    self.showSpinner(onView: self.view)
-                case .stop:
-                    self.removeSpinner()
-            }
-        })
-        
-        viewModel?.sharedViewModel?.error.bind(listener: {  error in
-            guard let _ = error else { return }
-            self.showErrorAlert()
-        })
+        viewModel?.sharedViewModel?.viewState.observe(on: MainScheduler.instance)
+                                             .subscribe(onNext: { state in
+                                                 guard let state = state else { return }
+                                                 self.viewStateHandler(state: state)
+                                             })
+                                             .disposed(by: disposeBag)
+                                             
+    }
+}
+
+// MARK: - Private Methods
+extension HomeViewController {
+    private func viewStateHandler(state: SharedViewStates) {
+        switch state {
+            case .loading(let status):
+                guard let status = status else { return }
+                self.spinnerStatusHandler(status: status)
+            case .errorState(let error):
+                guard let _ = error else { return }
+                self.showErrorAlert()
+            case .postsModelsChanged(let models):
+                guard let models = models else { return }
+                self.setupPostsView(from: models)
+        }
+    }
+    
+    private func spinnerStatusHandler(status: SpinnerStatus) {
+        switch status {
+            case .start:
+                self.showSpinner(onView: self.view)
+            case .stop:
+                self.removeSpinner()
+        }
     }
 }
 
@@ -69,7 +85,6 @@ extension HomeViewController {
             let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(self.filterButtonTapped))
             self.navigationItem.rightBarButtonItem = filterButton
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            self.navigationController?.navigationBar.backgroundColor = UIColor.colorCatalog(name: .primaryBackground)
             self.title = "New York Times"
         }
     }

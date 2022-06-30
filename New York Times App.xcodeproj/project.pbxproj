@@ -43,6 +43,8 @@
 		B08CCA962780BC91003A9B19 /* Posts+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA952780BC91003A9B19 /* Posts+View.swift */; };
 		B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */; };
 		B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA9C2780C0EF003A9B19 /* Posts+Model.swift */; };
+		B0E93DF1286E202E0025F005 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B0E93DF0286E202E0025F005 /* RxCocoa */; };
+		B0E93DF3286E202E0025F005 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B0E93DF2286E202E0025F005 /* RxSwift */; };
 		B0F1AFF2277B7A03009AA9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */; };
 		B0F1AFF4277B7A03009AA9BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */; };
 		B0F1AFF6277B7A03009AA9BE /* Home+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF5277B7A03009AA9BE /* Home+View.swift */; };
@@ -128,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0E93DF3286E202E0025F005 /* RxSwift in Frameworks */,
+				B0E93DF1286E202E0025F005 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +663,10 @@
 			dependencies = (
 			);
 			name = "New York Times App";
+			packageProductDependencies = (
+				B0E93DF0286E202E0025F005 /* RxCocoa */,
+				B0E93DF2286E202E0025F005 /* RxSwift */,
+			);
 			productName = "New York Times App";
 			productReference = B0F1AFEE277B7A03009AA9BE /* New York Times App.app */;
 			productType = "com.apple.product-type.application";
@@ -731,6 +739,9 @@
 				Base,
 			);
 			mainGroup = B0F1AFE5277B7A03009AA9BE;
+			packageReferences = (
+				B0E93DEF286E202E0025F005 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = B0F1AFEF277B7A03009AA9BE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1176,6 +1187,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B0E93DEF286E202E0025F005 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B0E93DF0286E202E0025F005 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0E93DEF286E202E0025F005 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		B0E93DF2286E202E0025F005 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0E93DEF286E202E0025F005 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B0F1AFE6277B7A03009AA9BE /* Project object */;
 }

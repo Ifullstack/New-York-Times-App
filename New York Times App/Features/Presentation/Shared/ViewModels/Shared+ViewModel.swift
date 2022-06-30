@@ -6,6 +6,13 @@
 //
 
 import Foundation
+import RxSwift
+
+enum SharedViewStates {
+    case loading(SpinnerStatus?),
+         errorState(Error?),
+         postsModelsChanged([PostsModel]?)
+}
 
 protocol SharedViewModelInput {
     func fetchPosts(parameters: FetchPostsUseCaseParameters)
@@ -18,19 +25,16 @@ protocol SharedViewModelInput {
 }
 
 protocol SharedViewModelOutput {
-    var postsModel: Box<[PostsModel]?> { get }
-    var spinnerStatus: Box<SpinnerStatus?> { get }
-    var error: Box<Error?> { get }
+    var viewState: PublishSubject<SharedViewStates?> { get }
 }
 
 protocol SharedViewModel: SharedViewModelInput,
                           SharedViewModelOutput {}
 
 class DefaultSharedViewModel: SharedViewModel {
+    
     // Bindings
-    var postsModel: Box<[PostsModel]?> = Box(nil)
-    var spinnerStatus: Box<SpinnerStatus?> = Box(nil)
-    var error: Box<Error?> = Box(nil)
+    var viewState: PublishSubject<SharedViewStates?> = PublishSubject<SharedViewStates?>()
     
     // UseCases
     private let fetchPostsUseCase: FetchPostsUseCase?
@@ -49,22 +53,23 @@ class DefaultSharedViewModel: SharedViewModel {
 // MARK: - Public Methods
 extension DefaultSharedViewModel {
     func fetchPosts(parameters: FetchPostsUseCaseParameters) {
-        spinnerStatus.value = .start
+        
+        viewState.onNext(.loading(.start))
         
         let completion: (Result<PostsEntity, Error>) -> Void = { result in
             switch result {
                 case .failure(let error):
-                    self.error.value = error
+                    self.viewState.onNext(.errorState(error))
                 case .success(let entity):
                     guard let results = entity.results else {
-                        self.error.value = AppError.unExpectedError
+                        self.viewState.onNext(.errorState(AppError.unExpectedError))
                         return
                     }
-                    self.postsModel.value = results.map { entity -> PostsModel in
+                    self.viewState.onNext(.postsModelsChanged(results.map { entity -> PostsModel in
                         return PostsModel(entity: entity)
-                    }
+                    }))
             }
-            self.spinnerStatus.value = .stop
+            self.viewState.onNext(.loading(.stop))
         }
         
         fetchPostsUseCase?.execute(params: parameters, completion: completion)
