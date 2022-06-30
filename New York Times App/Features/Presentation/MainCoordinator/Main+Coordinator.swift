@@ -35,6 +35,7 @@ extension MainCoordinator {
     func goToHomeView() {
         let view = HomeViewController()
         view.coordinator = self
+        view.viewModel = DefaultHomeViewModel()
         navigationController.pushViewController(view, animated: true)
     }
     
