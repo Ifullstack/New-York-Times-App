@@ -61,15 +61,6 @@ class PostFiltersView: UIView {
         
         setupConstraints()
     }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
 }
 
 // MARK: - Public Methods
@@ -97,4 +88,15 @@ extension PostFiltersView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - Constraints
+extension PostFiltersView {
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+}
 

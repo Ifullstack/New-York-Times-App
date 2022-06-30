@@ -63,15 +63,6 @@ class MostSharedFiltersView: UIView {
         
         setupConstraints()
     }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
 }
 
 // MARK: - Public Methods
@@ -96,5 +87,17 @@ extension MostSharedFiltersView: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(from: model)
         cell.delegate = delegate
         return cell
+    }
+}
+
+// MARK: - Constraints
+extension MostSharedFiltersView {
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
 }

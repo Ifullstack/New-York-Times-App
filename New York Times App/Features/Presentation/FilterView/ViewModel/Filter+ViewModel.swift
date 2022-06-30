@@ -62,7 +62,7 @@ class DefaultFilterViewModel: FilterViewModel {
     // Exposed Properties
     var sharedViewModel: SharedViewModel?
 
-    init(sharedViewModel: SharedViewModel) {
+    init(sharedViewModel: SharedViewModel = DefaultSharedViewModel()) {
         self.sharedViewModel = sharedViewModel
     }
     
