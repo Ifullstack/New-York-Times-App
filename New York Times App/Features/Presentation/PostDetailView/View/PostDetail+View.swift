@@ -24,17 +24,27 @@ class PostDetailViewController: BaseViewController<MainCoordinator> {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+}
+
+// MARK: - Setup View
+extension PostDetailViewController {
+    private func setupNavigationBar() {
+        DispatchQueue.main.async {
+             self.title = self.sharedViewModel?.postModelSelected?.title
+        }
+    }
+    
     private func setupView() {
-        self.title = sharedViewModel?.postModelSelected?.title
-        
         configureWebView()
-        
         view.addSubview(webView)
         setConstraints()
     }
     
     private func configureWebView() {
-       
         guard let sharedViewModel = sharedViewModel,
               let postModelSelected = sharedViewModel.postModelSelected,
               let postUrl = postModelSelected.postUrl,
@@ -50,7 +60,6 @@ class PostDetailViewController: BaseViewController<MainCoordinator> {
         webView.load(URLRequest(url: url))
     }
 }
-
 
 // MARK: - Setup Constraints
 extension PostDetailViewController {

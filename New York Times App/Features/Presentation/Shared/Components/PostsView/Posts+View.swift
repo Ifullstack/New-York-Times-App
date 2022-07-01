@@ -5,99 +5,35 @@
 //  Created by Cane Allesta on 1/1/22.
 //
 
-import UIKit
+import SwiftUI
 
-extension PostsView {
-    private enum Cells {
-        static let postsCellId = "postCell"
-    }
-}
-
-class PostsView: UIView {
-    
+struct PostsView: View {
     var delegate: PostsViewProtocol?
+    @State var postsModel: [PostsModel]
     
-    private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return tableView
-    }()
-    
-    private var postsModel: [PostsModel]? {
-        didSet {
-            self.tableView.reloadData()
+    var body: some View {
+        ScrollView( .vertical, showsIndicators: false ) {
+            ForEach( self.postsModel, id:\.self ) { post in
+                withAnimation {
+                    VStack {
+                        ImageView(imageUrl: post.image ?? "")
+                            .frame(width: 350, height: 150)
+                            .cornerRadius(18.0)
+                            .onTapGesture(count: 1) {
+                                self.delegate?.postTapped(postModelSelected: post)
+                            }
+                        HStack {
+                            Text("\( post.title ?? "")")
+                                .font(.system(size: 22.0, weight: .heavy))
+                                .foregroundColor(Color.primaryTextColor)
+                                .padding(.horizontal)
+                            Spacer()
+                        }
+                    }.padding(.vertical)
+                }
+            }
         }
     }
-    
-    // MARK: View lifeCycle
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupView()
-    }
-    
-    // MARK: Setup
-    private func setupView() {    
-        addSubview(tableView)
-    
-        tableView.register(PostViewCell.self, forCellReuseIdentifier: Cells.postsCellId)
-        tableView.backgroundColor = .clear
-        tableView.sectionIndexBackgroundColor = .clear
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.alwaysBounceVertical = false
-        tableView.alwaysBounceHorizontal = false
-        tableView.allowsSelection = false
-       
-        setupConstraints()
-    }
 }
 
-// MARK: - Public Methods
-extension PostsView {
-    func configureView(from model: [PostsModel]) {
-        postsModel = model
-    }
-}
 
-// MARK: - Delegates
-extension PostsView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postsModel?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.postsCellId) as? PostViewCell,
-              let model = postsModel?[indexPath.row] else {
-            return UITableViewCell()
-        }
-        
-        cell.delegate = delegate
-        cell.backgroundColor = .clear
-        cell.configureCell(from: model)
-        return cell
-    }
-    
-    // TODO: Mejorar este height estático y si no me gusta cambiar a una collection
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(300)
-    }
-}
-
-// MARK: - Constraints
-extension PostsView {
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-}

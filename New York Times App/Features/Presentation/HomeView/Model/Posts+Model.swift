@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostsModel {
+struct PostsModel: Hashable {
     var image: String?
     var title: String?
     var autor: String?

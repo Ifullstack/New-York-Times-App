@@ -57,6 +57,5 @@ extension BaseViewController {
             }))
             self.present(alertCtrl, animated: true, completion: nil)
         }
-        
     }
 }

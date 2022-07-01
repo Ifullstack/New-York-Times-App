@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 enum AssetsColors {
     case blurBackGround
@@ -27,4 +28,8 @@ extension UIColor {
                 return UIColor(named: "ShadowColor")
         }
     }
+}
+
+extension Color {
+    static let primaryTextColor = Color("PrimaryTextColor")
 }

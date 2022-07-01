@@ -7,24 +7,17 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 class HomeViewController: BaseViewController<MainCoordinator> {
     
     var viewModel: HomeViewModel?
     private var cancellables = Set<AnyCancellable>()
-    
-    private var postsView: PostsView = {
-        let postsView = PostsView(frame: .zero)
-        postsView.translatesAutoresizingMaskIntoConstraints = false
         
-        return postsView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.viewDidLoad()
-        setupView()
         setupBinding()
+        viewModel?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +29,6 @@ class HomeViewController: BaseViewController<MainCoordinator> {
 // MARK: - Setup Binding
 extension HomeViewController {
     private func setupBinding() {
-        
         viewModel?.sharedViewModel?.postsModelPublisher
                                   .receive(on: RunLoop.main)
                                   .sink(receiveValue: { model in
@@ -68,11 +60,6 @@ extension HomeViewController {
 
 // MARK: - Setup View
 extension HomeViewController {
-    private func setupView() {
-        view.addSubview(postsView)
-        setupConstraints()
-    }
-    
     private func setupNavigationBar() {
         DispatchQueue.main.async {
             let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(self.filterButtonTapped))
@@ -85,8 +72,11 @@ extension HomeViewController {
     
     private func setupPostsView(from models: [PostsModel]) {
         DispatchQueue.main.async {
-            self.postsView.delegate = self
-            self.postsView.configureView(from: models)
+            let postsView = UIHostingController(rootView: PostsView(delegate: self,
+                                                                    postsModel: models))
+            postsView.view.frame = self.view.frame
+            self.addChild(postsView)
+            self.view.addSubview(postsView.view)
         }
     }
 }
@@ -106,17 +96,5 @@ extension HomeViewController: PostsViewProtocol {
         }
         sharedViewModel.setPostModelSelected(postModelSelected: postModelSelected)
         coordinator?.goToPostDetailView(sharedViewModel: sharedViewModel)
-    }
-}
-
-// MARK: - Constraints
-extension HomeViewController {
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            postsView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20),
-            postsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            postsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            postsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 }
