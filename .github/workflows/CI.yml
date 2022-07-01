@@ -3,9 +3,9 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "develop", "origin/develop-modern-features-swiftui","origin/develop-modern-features-uikit"]
+    branches: [ "main", "develop", "develop-swiftui","develop-modern-features-uikit"]
   pull_request:
-    branches: [ "main", "develop", "origin/develop-modern-features-swiftui","origin/develop-modern-features-uikit"]
+    branches: [ "main", "develop", "develop-swiftui","develop-modern-features-uikit"]
 
 jobs:
   build:
