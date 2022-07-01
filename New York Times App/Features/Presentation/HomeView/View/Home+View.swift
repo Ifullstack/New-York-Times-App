@@ -10,7 +10,7 @@ import Combine
 
 class HomeViewController: BaseViewController<MainCoordinator> {
     
-    private let viewModel: HomeViewModel = DefaultHomeViewModel()
+    var viewModel: HomeViewModel?
     private var cancellables = Set<AnyCancellable>()
     
     private var postsView: PostsView = {
@@ -22,7 +22,7 @@ class HomeViewController: BaseViewController<MainCoordinator> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
+        viewModel?.viewDidLoad()
         setupView()
         setupBinding()
     }
@@ -37,14 +37,14 @@ class HomeViewController: BaseViewController<MainCoordinator> {
 extension HomeViewController {
     private func setupBinding() {
         
-        viewModel.sharedViewModel?.postsModelPublisher
+        viewModel?.sharedViewModel?.postsModelPublisher
                                   .receive(on: RunLoop.main)
                                   .sink(receiveValue: { model in
                                         guard let model = model else { return }
                                         self.setupPostsView(from: model)
                                   }).store(in: &cancellables)
         
-        viewModel.sharedViewModel?.spinnerStatusPublisher
+        viewModel?.sharedViewModel?.spinnerStatusPublisher
                                   .receive(on: RunLoop.main)
                                   .sink(receiveValue: { status in
                                       guard let status = status else { return }
@@ -57,7 +57,7 @@ extension HomeViewController {
                                   }).store(in: &cancellables)
         
 
-        viewModel.sharedViewModel?.errorPublisher
+        viewModel?.sharedViewModel?.errorPublisher
                                   .receive(on: RunLoop.main)
                                   .sink(receiveValue: { error in
                                       guard let _ = error else { return }
@@ -94,14 +94,14 @@ extension HomeViewController {
 // MARK: - User Actions
 extension HomeViewController: PostsViewProtocol {
     @objc private func filterButtonTapped() {
-        guard let sharedViewModel = viewModel.sharedViewModel else {
+        guard let sharedViewModel = viewModel?.sharedViewModel else {
             return
         }
         coordinator?.goToFilterView(sharedViewModel: sharedViewModel)
     }
     
     func postTapped(postModelSelected: PostsModel) {
-        guard let sharedViewModel = viewModel.sharedViewModel else {
+        guard let sharedViewModel = viewModel?.sharedViewModel else {
             return
         }
         sharedViewModel.setPostModelSelected(postModelSelected: postModelSelected)
