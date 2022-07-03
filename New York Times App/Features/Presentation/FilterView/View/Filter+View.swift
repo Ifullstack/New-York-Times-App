@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FilterViewController: BaseViewController<MainCoordinator> {
+class FilterViewController: BaseViewController<MainCoordinator> {
     
     var viewModel: FilterViewModel?
     

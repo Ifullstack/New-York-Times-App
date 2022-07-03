@@ -25,6 +25,7 @@
 		B06DECDD2792F31E00CF4A34 /* FetchPostRepository+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DECDC2792F31E00CF4A34 /* FetchPostRepository+Test.swift */; };
 		B06DECE02792FACF00CF4A34 /* Api+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DECDF2792FACF00CF4A34 /* Api+Service.swift */; };
 		B06DECE42792FC9A00CF4A34 /* ApiService+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06DECE32792FC9A00CF4A34 /* ApiService+Mock.swift */; };
+		B076902D287189E100FBA2CB /* SUILabel+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B076902C287189E100FBA2CB /* SUILabel+View.swift */; };
 		B07C2615286F72A00012840C /* ImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07C2614286F72A00012840C /* ImageView+Helper.swift */; };
 		B08CCA5727805F62003A9B19 /* Filter+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5627805F62003A9B19 /* Filter+View.swift */; };
 		B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA5927805FA0003A9B19 /* Coordinator.swift */; };
@@ -42,7 +43,7 @@
 		B08CCA8C2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA8B2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift */; };
 		B08CCA932780B707003A9B19 /* FilterView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA922780B707003A9B19 /* FilterView+Constraints.swift */; };
 		B08CCA962780BC91003A9B19 /* Posts+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA952780BC91003A9B19 /* Posts+View.swift */; };
-		B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */; };
+		B08CCA9A2780BDBF003A9B19 /* PostCard+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA992780BDBF003A9B19 /* PostCard+View.swift */; };
 		B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CCA9C2780C0EF003A9B19 /* Posts+Model.swift */; };
 		B0F1AFF2277B7A03009AA9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */; };
 		B0F1AFF4277B7A03009AA9BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F1AFF3277B7A03009AA9BE /* SceneDelegate.swift */; };
@@ -91,6 +92,7 @@
 		B06DECDC2792F31E00CF4A34 /* FetchPostRepository+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FetchPostRepository+Test.swift"; sourceTree = "<group>"; };
 		B06DECDF2792FACF00CF4A34 /* Api+Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Api+Service.swift"; sourceTree = "<group>"; };
 		B06DECE32792FC9A00CF4A34 /* ApiService+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiService+Mock.swift"; sourceTree = "<group>"; };
+		B076902C287189E100FBA2CB /* SUILabel+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SUILabel+View.swift"; sourceTree = "<group>"; };
 		B07C2614286F72A00012840C /* ImageView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView+Helper.swift"; sourceTree = "<group>"; };
 		B08CCA5627805F62003A9B19 /* Filter+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Filter+View.swift"; sourceTree = "<group>"; };
 		B08CCA5927805FA0003A9B19 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 		B08CCA8B2780AEE8003A9B19 /* CheckBoxFilter+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckBoxFilter+Cell.swift"; sourceTree = "<group>"; };
 		B08CCA922780B707003A9B19 /* FilterView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterView+Constraints.swift"; sourceTree = "<group>"; };
 		B08CCA952780BC91003A9B19 /* Posts+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+View.swift"; sourceTree = "<group>"; };
-		B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostView+Cell.swift"; sourceTree = "<group>"; };
+		B08CCA992780BDBF003A9B19 /* PostCard+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostCard+View.swift"; sourceTree = "<group>"; };
 		B08CCA9C2780C0EF003A9B19 /* Posts+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Posts+Model.swift"; sourceTree = "<group>"; };
 		B0F1AFEE277B7A03009AA9BE /* New York Times App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New York Times App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F1AFF1277B7A03009AA9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -340,6 +342,14 @@
 			path = ApiService;
 			sourceTree = "<group>";
 		};
+		B076902B287189B000FBA2CB /* SUILabelView */ = {
+			isa = PBXGroup;
+			children = (
+				B076902C287189E100FBA2CB /* SUILabel+View.swift */,
+			);
+			path = SUILabelView;
+			sourceTree = "<group>";
+		};
 		B07C2613286F72920012840C /* ImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,18 +523,19 @@
 		B08CCA972780BD68003A9B19 /* PostsView */ = {
 			isa = PBXGroup;
 			children = (
-				B08CCA982780BD96003A9B19 /* PostsViewCell */,
+				B076902B287189B000FBA2CB /* SUILabelView */,
+				B08CCA982780BD96003A9B19 /* PostCardView */,
 				B08CCA952780BC91003A9B19 /* Posts+View.swift */,
 			);
 			path = PostsView;
 			sourceTree = "<group>";
 		};
-		B08CCA982780BD96003A9B19 /* PostsViewCell */ = {
+		B08CCA982780BD96003A9B19 /* PostCardView */ = {
 			isa = PBXGroup;
 			children = (
-				B08CCA992780BDBF003A9B19 /* PostView+Cell.swift */,
+				B08CCA992780BDBF003A9B19 /* PostCard+View.swift */,
 			);
-			path = PostsViewCell;
+			path = PostCardView;
 			sourceTree = "<group>";
 		};
 		B08CCA9B2780C0E2003A9B19 /* Model */ = {
@@ -795,7 +806,7 @@
 				B08CCA9D2780C0EF003A9B19 /* Posts+Model.swift in Sources */,
 				B06A20E72781BA0800692614 /* Posts+Decodable.swift in Sources */,
 				B06A20DB2781B9AA00692614 /* FetchPost+UseCase.swift in Sources */,
-				B08CCA9A2780BDBF003A9B19 /* PostView+Cell.swift in Sources */,
+				B08CCA9A2780BDBF003A9B19 /* PostCard+View.swift in Sources */,
 				B08CCA7627807B3A003A9B19 /* Label+View.swift in Sources */,
 				B06A20E52781B9FC00692614 /* FetchPostRepository+Parameters.swift in Sources */,
 				B02791D02780E79700E27315 /* Home+ViewModel.swift in Sources */,
@@ -804,6 +815,7 @@
 				B08CCA8127808B1A003A9B19 /* RadioFilters+Cell.swift in Sources */,
 				B08CCA7E27807F8A003A9B19 /* MostSharedFilters+View.swift in Sources */,
 				B06A20D42781A5C500692614 /* Shared+ViewModel.swift in Sources */,
+				B076902D287189E100FBA2CB /* SUILabel+View.swift in Sources */,
 				B08CCA962780BC91003A9B19 /* Posts+View.swift in Sources */,
 				B08CCA5A27805FA0003A9B19 /* Coordinator.swift in Sources */,
 				B06A20D127819DC100692614 /* Spinner+Status.swift in Sources */,
