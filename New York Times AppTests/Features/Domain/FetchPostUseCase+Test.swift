@@ -42,7 +42,7 @@ class FetchPostRepositoryUseCaseTest: XCTestCase {
                     XCTAssertNotNil(entity)
                 case .failure(let error):
                     // THEN
-                    XCTAssertNil(error)
+                    XCTAssertNotNil(error)
             }
             
             expt.fulfill()

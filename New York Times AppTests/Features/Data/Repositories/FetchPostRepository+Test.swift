@@ -31,8 +31,8 @@ class FetchPostRepositoryTest: XCTestCase {
         
         // WHEN
         sut?.fetchPosts(parameters: FetchPostsRespositoryParameters(postType: "emailed",
-                                                                   period: "7",
-                                                                   sharedType: "")) { result in
+                                                                    period: "7",
+                                                                    sharedType: "")) { result in
             
             switch result {
                 case .success(let decodable):
@@ -40,7 +40,7 @@ class FetchPostRepositoryTest: XCTestCase {
                     XCTAssertNotNil(decodable)
                 case .failure(let error):
                     // THEN
-                    XCTAssertNil(error)
+                    XCTAssertNotNil(error)
             }
             
             expt.fulfill()

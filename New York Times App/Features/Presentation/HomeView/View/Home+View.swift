@@ -23,8 +23,8 @@ class HomeViewController: BaseViewController<MainCoordinator> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
         setupBinding()
+        setupView()
         viewModel?.viewDidLoad()
     }
     
